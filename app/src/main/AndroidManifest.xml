@@ -35,8 +35,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/webblenTheme">
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +56,10 @@
         <activity android:name=".InterestsActivity" />
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".OnboardingActivity"></activity>
+        <activity
+            android:name=".OnboardingActivity"
+            android:theme="@style/webblenNoActionBarTheme">
+        </activity>
     </application>
 
 </manifest>

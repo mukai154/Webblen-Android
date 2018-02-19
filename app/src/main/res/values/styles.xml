@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="webblenTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="webblenNoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="colorAccent">@color/accent_material_light_1</item>
     </style>
 
