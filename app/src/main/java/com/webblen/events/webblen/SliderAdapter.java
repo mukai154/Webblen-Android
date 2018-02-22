@@ -34,17 +34,17 @@ public class SliderAdapter extends PagerAdapter {
     public String[] slide_headings = {
             "Welcome to Webblen!",
             "Be Involved",
-            "Connect",
-            "Earn",
-            "Grow"
+            "Connect with Others",
+            "Earn Rewards",
+            "Get Started!"
     };
 
     public String[] slide_descriptions = {
-            "The World's First Community Building Platform",
+            "The World's First Incentivized Community Building Platform",
             "Know About the Different Events Happening Around You According to Your Interests and Location",
             "Meet and Connect With Others That Have Similar Interests as Your Own",
             "The More Involved You are, the More Money You Earn Through Cryptocurrencies",
-            "Watch Your Community Grow"
+            "What are You Waiting for? Get Involved, Make Some Money, and Watch Your Community Grow!"
     };
 
     @Override
@@ -74,5 +74,9 @@ public class SliderAdapter extends PagerAdapter {
 
         return view;
     }
-    
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object){
+        container.removeView((RelativeLayout)object);
+    }
 }
