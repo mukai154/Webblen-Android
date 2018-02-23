@@ -1,5 +1,6 @@
 package com.webblen.events.webblen;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +45,9 @@ public class OnboardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int pageCount = dots.length - 1;
+                Intent registerIntent = new Intent(OnboardingActivity.this, RegisterActivity.class);
                 if (currentPage == pageCount){
+                    startActivity(registerIntent);
                     Log.d("CLICKED", "onClick: LAST PAGE");
                 }
                 else {

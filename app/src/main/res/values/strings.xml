@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Webblen</string>
     <string name="title_activity_main">Main</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_pass_hint">Confirm Password</string>
 </resources>
