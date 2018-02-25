@@ -45,9 +45,9 @@ public class OnboardingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int pageCount = dots.length - 1;
-                Intent registerIntent = new Intent(OnboardingActivity.this, RegisterActivity.class);
+                Intent loginIntent = new Intent(OnboardingActivity.this, LoginActivity.class);
                 if (currentPage == pageCount){
-                    startActivity(registerIntent);
+                    startActivity(loginIntent);
                     Log.d("CLICKED", "onClick: LAST PAGE");
                 }
                 else {
