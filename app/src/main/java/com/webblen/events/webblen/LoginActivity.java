@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user_profile is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null){
@@ -106,13 +106,13 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in user_profile's information
                             Log.d("FBLog", "signInWithCredential:success");
                             FirebaseUser user = auth.getCurrentUser();
                             fbLoginBtn.setEnabled(true);
                             userIsLoggedIn();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a message to the user_profile.
                             Log.w("FBLOG", "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

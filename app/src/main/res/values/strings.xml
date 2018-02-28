@@ -6,8 +6,8 @@
     <string name="confirm_pass_hint">Confirm Password</string>
     <string name="terms_and_conditions_login"><u>By logging in, you agree to our Terms and Conditions</u></string>
     <string name="terms_and_conditions_register"><u>By registering, you agree to our Terms and Conditions</u></string>
-    <string name="facebook_app_id">APP-ID</string>
-    <string name="fb_login_protocol_scheme">fbAPP-ID</string>
+    <string name="facebook_app_id"></string>
+    <string name="fb_login_protocol_scheme"></string>
     <string name="interests_menu_option">Interests</string>
     <string name="create_event_menu_option">Create Event</string>
     <string name="my_events_menu_option">My Events</string>
@@ -17,4 +17,10 @@
     <string name="logout_menu_option">Logout</string>
     <string name="open_menu">Open</string>
     <string name="close_menu">Close</string>
+    <string name="username_placeholder">\@username</string>
+    <string name="webblenDesc">Tokens that can be traded and transferred at anytime. \nWebblen can be converted to Web Power in a process called powering up.</string>
+    <string name="webPowerDesc">Influence tokens which give you more control over event payouts and allow you to earn more on attendance rewards.</string>
+    <string name="webDollarDesc">Tokens worth about $1.00 of WBLN, currently collecting 0% APR.</string>
+    <string name="savingsDesc">Balance subject to 3 day withdraw waiting period, Web Dollars currently collecting 0% APR.</string>
+    <string name="accountValDesc">The value is based on an average value of WBLN in US dollars.</string>
 </resources>
