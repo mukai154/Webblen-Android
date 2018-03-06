@@ -67,7 +67,8 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SelectDateTimeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/MainThemeNoAction"></activity>
         <activity
             android:name=".SelectLocationActivity"
             android:screenOrientation="portrait"></activity>
@@ -101,12 +102,12 @@
         <activity
             android:name=".OnboardingActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
         <activity android:name=".WalletActivity"></activity>
     </application>

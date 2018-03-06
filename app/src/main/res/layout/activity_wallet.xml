@@ -125,7 +125,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="WEBBLEN"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,14 +138,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:text="@string/webblenDesc"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/webblenAmount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/webblenText" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/wbblnSpinner"
                 android:layout_width="30dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
@@ -161,7 +161,7 @@
                 android:text="0.000 WBLN"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinner"
+                app:layout_constraintEnd_toStartOf="@+id/wbblnSpinner"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
@@ -175,18 +175,18 @@
             app:layout_constraintTop_toBottomOf="@+id/webblenWalletLayout">
 
             <TextView
-                android:id="@+id/webblenAmount2"
+                android:id="@+id/webPowerAmnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="0.000 WBLN"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinner2"
+                app:layout_constraintEnd_toStartOf="@+id/webPowerSpinner"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/webPowerSpinner"
                 android:layout_width="30dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
@@ -201,20 +201,22 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="WEB POWER"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/webPowerDescText"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/webPowerDesc"
-                android:textSize="8sp"
-                app:layout_constraintEnd_toStartOf="@+id/webblenAmount2"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/webPowerAmnt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/webPowerText" />
         </android.support.constraint.ConstraintLayout>
@@ -228,7 +230,7 @@
             app:layout_constraintTop_toBottomOf="@+id/webPowerWalletLayout">
 
             <TextView
-                android:id="@+id/webPowerDescText2"
+                android:id="@+id/webDollarDescText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -236,7 +238,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:text="@string/webDollarDesc"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView12"
                 app:layout_constraintStart_toStartOf="parent"
@@ -249,7 +251,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="WEB DOLLARS"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -293,7 +295,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:text="@string/savingsDesc"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/webblenAmount3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -306,7 +308,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="SAVINGS"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -361,28 +363,28 @@
             app:layout_constraintTop_toBottomOf="@+id/savingsWalletLayout">
 
             <TextView
-                android:id="@+id/webPowerDescText4"
+                android:id="@+id/accountValDescText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/accountValDesc"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/accountVal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/webPowerText4" />
+                app:layout_constraintTop_toBottomOf="@+id/accountValText" />
 
             <TextView
-                android:id="@+id/webPowerText4"
+                android:id="@+id/accountValText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Account Value"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,9 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pastel_orange_gradient"
     tools:context="com.webblen.events.webblen.CreateEventActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/eventHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Create Event"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/horizontalLine"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventHead"
+            app:srcCompat="@color/colorWhite" />
+
+        <EditText
+            android:id="@+id/eventTitleText"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/user_event_stats_back"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/colorDarkGray"
+            app:layout_constraintEnd_toStartOf="@+id/addImgBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
+
+        <ImageButton
+            android:id="@+id/addImgBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalLine"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <EditText
+            android:id="@+id/eventDescriptionText"
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/user_event_stats_back"
+            android:ems="10"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/colorDarkGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addImgBtn" />
+
+
+        <ImageView
+            android:id="@+id/horizontal2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventDescriptionText"
+            app:srcCompat="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/dateTimeBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/transparent"
+            android:text="Date &amp; Time"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal2" />
+
+        <ImageView
+            android:id="@+id/horizontal3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTimeBtn"
+            app:srcCompat="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/locationBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:text="Location"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTimeBtn" />
+
+        <ImageView
+            android:id="@+id/horizontal4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
+            app:srcCompat="@android:color/white" />
+
+        <Button
+            android:id="@+id/filterBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:text="Filter Settings"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
+
+        <ImageView
+            android:id="@+id/horizontal5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterBtn"
+            app:srcCompat="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/catBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/transparent"
+            android:text="Categories"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal5" />
+
+
+        <ImageView
+            android:id="@+id/horizontal6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/catBtn"
+            app:srcCompat="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/eventPriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Event Total: $0.00"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal6" />
+
+        <ImageButton
+            android:id="@+id/priceInfoBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal6"
+            app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+
+        <Button
+            android:id="@+id/reviewEventBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/user_event_stats_back"
+            android:text="Review Event"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceInfoBtn" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>
