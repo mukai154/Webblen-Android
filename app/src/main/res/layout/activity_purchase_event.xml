@@ -6,4 +6,150 @@
     android:layout_height="match_parent"
     tools:context="com.webblen.events.webblen.PurchaseEventActivity">
 
+    <ImageView
+        android:id="@+id/eventPhotoView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorDarkGray" />
+
+    <ImageView
+        android:id="@+id/eventCategory"
+        android:layout_width="65dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/eventYear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventPhotoView"
+        app:srcCompat="@drawable/amusement" />
+
+    <TextView
+        android:id="@+id/eventDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="31"
+        android:textAlignment="center"
+        android:textColor="@color/colorDarkGray"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventMonth" />
+
+    <TextView
+        android:id="@+id/eventMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Mar"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/eventDay"
+        app:layout_constraintStart_toStartOf="@+id/eventDay"
+        app:layout_constraintTop_toBottomOf="@+id/eventPhotoView" />
+
+    <TextView
+        android:id="@+id/eventYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2018"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/eventDay"
+        app:layout_constraintStart_toStartOf="@+id/eventDay"
+        app:layout_constraintTop_toBottomOf="@+id/eventDay" />
+
+    <TextView
+        android:id="@+id/eventDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Pull throught and have the funt times here."
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/eventYear"
+        app:layout_constraintEnd_toStartOf="@+id/eventDay"
+        app:layout_constraintStart_toEndOf="@+id/eventCategory"
+        app:layout_constraintTop_toBottomOf="@+id/eventTitle" />
+
+    <TextView
+        android:id="@+id/eventRadius"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Notify Those Within 35 miles"
+        app:layout_constraintEnd_toStartOf="@+id/eventDay"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/eventPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Total: $34.99"
+        android:textColor="@color/colorDarkGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventRadius" />
+
+    <Button
+        android:id="@+id/confirmPurchaseBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/com_facebook_button_login_silver_background"
+        android:text="Confirm Purchase"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/eventTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="Webblen Event! Check It Out!"
+        android:textColor="@color/colorDarkGray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/eventDay"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/eventCategory"
+        app:layout_constraintTop_toBottomOf="@+id/eventUsername" />
+
+    <TextView
+        android:id="@+id/eventUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/username_placeholder"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/eventDay"
+        app:layout_constraintStart_toEndOf="@+id/eventCategory"
+        app:layout_constraintTop_toBottomOf="@+id/eventPhotoView" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventYear"
+        app:srcCompat="@color/colorDarkGray" />
 </android.support.constraint.ConstraintLayout>

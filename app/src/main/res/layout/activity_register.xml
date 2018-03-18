@@ -8,6 +8,18 @@
     tools:context="com.webblen.events.webblen.RegisterActivity"
     android:id="@+id/relativeLayout">
 
+    <TextView
+        android:id="@+id/termsConditionsPath"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="@string/terms_and_conditions_register"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
     <ImageView
         android:id="@+id/webblenRing"
         android:layout_width="125dp"
@@ -19,7 +31,7 @@
         app:srcCompat="@drawable/transparent_logo" />
 
     <EditText
-        android:id="@+id/editEmail"
+        android:id="@+id/registerEmail"
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_marginLeft="8dp"
@@ -36,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/webblenRing" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/registerPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,10 +62,10 @@
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
 
     <EditText
-        android:id="@+id/editConfirmPassword"
+        android:id="@+id/confirmRegisterPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -67,7 +79,7 @@
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
     <Button
         android:id="@+id/registerBtn"
@@ -82,7 +94,7 @@
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmRegisterPassword" />
 
     <Button
         android:id="@+id/loginIntentBtn"

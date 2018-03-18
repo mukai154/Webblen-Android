@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -37,6 +38,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.twitter.sdk.android.core.SessionManager;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,12 +67,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     int PROXIMITY_RADIUS = 10000;
     double latitude,longitude;
 
+    //Firebase
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //***** Initialize
+
+        //Firebase
+        mAuth = FirebaseAuth.getInstance();
+
         //Menu
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -111,10 +124,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(intent);
                         break;
                     case(R.id.logoutMenuButton):
-                        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
                         drawerLayout.closeDrawers();
-                        startActivity(logoutIntent);
-                        finish();
+                        mAuth.signOut();
+                        LoginManager.getInstance().logOut();
+                        SessionManager<TwitterSession> sessionManager = TwitterCore.getInstance().getSessionManager();
+                        if (sessionManager.getActiveSession() != null){
+                            sessionManager.clearActiveSession();
+                        }
+                        logoutUser();
                         break;
                 }
                 return true;
@@ -253,4 +270,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    //** Authentication Methods and Handling
+    @Override
+    public void onStart(){
+        //Check if Firebase user is signed in and act accordingly
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null){
+            logoutUser();
+        }
+
+    }
+
+    private void logoutUser(){
+        Intent logoutIntent = new Intent(MainActivity.this, OnboardingActivity.class);
+        startActivity(logoutIntent);
+        finish();
+    }
+
 }

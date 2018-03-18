@@ -48,7 +48,7 @@ public class OnboardingActivity extends AppCompatActivity {
                 Intent loginIntent = new Intent(OnboardingActivity.this, LoginActivity.class);
                 if (currentPage == pageCount){
                     startActivity(loginIntent);
-                    Log.d("CLICKED", "onClick: LAST PAGE");
+                    finish();
                 }
                 else {
                     slideViewPager.setCurrentItem(currentPage + 1);

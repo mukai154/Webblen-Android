@@ -17,10 +17,133 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="?android:attr/colorBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Later"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/laterBtn"
+                app:layout_constraintStart_toStartOf="@+id/laterBtn"
+                app:layout_constraintTop_toBottomOf="@+id/laterBtn" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="This Month"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/thisMonthBtn"
+                app:layout_constraintStart_toStartOf="@+id/thisMonthBtn"
+                app:layout_constraintTop_toBottomOf="@+id/thisMonthBtn" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Tomorrow"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/tomorrowBtn"
+                app:layout_constraintStart_toStartOf="@+id/tomorrowBtn"
+                app:layout_constraintTop_toBottomOf="@+id/tomorrowBtn" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="This Week"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/thisWeekBtn"
+                app:layout_constraintStart_toStartOf="@+id/thisWeekBtn"
+                app:layout_constraintTop_toBottomOf="@+id/thisWeekBtn" />
+
+            <ImageButton
+                android:id="@+id/tomorrowBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@+id/thisWeekBtn"
+                app:layout_constraintStart_toEndOf="@+id/todayBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/pink_marker" />
+
+            <ImageButton
+                android:id="@+id/thisMonthBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@+id/laterBtn"
+                app:layout_constraintStart_toEndOf="@+id/thisWeekBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/green_marker" />
+
+            <ImageButton
+                android:id="@+id/laterBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/blue_marker" />
+
+            <ImageButton
+                android:id="@+id/todayBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/red_marker" />
+
+            <ImageButton
+                android:id="@+id/thisWeekBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/orange_marker" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Today"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/todayBtn"
+                app:layout_constraintStart_toStartOf="@+id/todayBtn"
+                app:layout_constraintTop_toBottomOf="@+id/todayBtn" />
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 

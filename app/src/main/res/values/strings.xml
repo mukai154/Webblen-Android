@@ -4,10 +4,12 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="confirm_pass_hint">Confirm Password</string>
-    <string name="terms_and_conditions_login"><u>By logging in, you agree to our Terms and Conditions</u></string>
-    <string name="terms_and_conditions_register"><u>By registering, you agree to our Terms and Conditions</u></string>
+    <string name="terms_and_conditions_login"><u>By Logging In, You Agree to Our Terms and Conditions</u></string>
+    <string name="terms_and_conditions_register"><u>By Registering, You Agree to Our Terms and Conditions</u></string>
     <string name="facebook_app_id">1366128250170949</string>
     <string name="fb_login_protocol_scheme">fb1366128250170949</string>
+    <string name="twitter_key">9gDtPWHxcnj6CUoyeVQCKGsGl</string>
+    <string name="twitter_secret">y57kSG4yUowPNVXNEy5EEbUybTR3Dt72VT4FydWhZ1oKMnspQa</string>
     <string name="interests_menu_option">Interests</string>
     <string name="create_event_menu_option">Create Event</string>
     <string name="my_events_menu_option">My Events</string>
