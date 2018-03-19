@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //***** Initialize
 
         //Firebase
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         drawerLayout.addDrawerListener(menuToggle);
         menuToggle.syncState();
+        getSupportActionBar().setTitle("Webblen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

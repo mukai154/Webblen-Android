@@ -4,6 +4,386 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pastel_orange_gradient"
     tools:context="com.webblen.events.webblen.SelectEventCategoriesActivity">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/setTagsBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@color/colorWhite" />
+
+    <TextView
+        android:id="@+id/eventTagsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Select Tags"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventTagsHeader"
+        app:srcCompat="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/setTagsBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/user_event_stats_back"
+        android:text="Set Tags"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/amusementTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Amusement"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/artTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/collegeTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="College Life"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/artTagBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/artTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Art"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/collegeTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/amusementTagBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/techTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Technology"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/theatreTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/partyDanceTagBtn" />
+
+            <Button
+                android:id="@+id/wineBrewTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Wine &amp; Brew"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/theatreTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/sportsTagBtn" />
+
+            <Button
+                android:id="@+id/theatreTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Theatre"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/wineBrewTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/techTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/shoppingTagBtn" />
+
+            <Button
+                android:id="@+id/partyDanceTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Party/Dance"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/shoppingTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/musicTagBtn" />
+
+            <Button
+                android:id="@+id/sportsTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Sports"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/shoppingTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/outdoorsTagBtn" />
+
+            <Button
+                android:id="@+id/shoppingTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Shopping"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/sportsTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/partyDanceTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/networkingTagBtn" />
+
+            <Button
+                android:id="@+id/musicTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Music"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/networkingTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodDrinkTagBtn" />
+
+            <Button
+                android:id="@+id/outdoorsTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Outdoors"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/networkingTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/healthTagBtn" />
+
+            <Button
+                android:id="@+id/networkingTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Networking"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/outdoorsTagBtn"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/musicTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/gamingTagBtn" />
+
+            <Button
+                android:id="@+id/foodDrinkTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Food &amp; Drink"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/gamingTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/educationTagBtn" />
+
+            <Button
+                android:id="@+id/healthTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Health &amp; Fitness"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gamingTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/familyTagBtn" />
+
+            <Button
+                android:id="@+id/gamingTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Gaming"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/healthTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/foodDrinkTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/entertainmentTagBtn" />
+
+            <Button
+                android:id="@+id/educationTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Education"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/entertainmentTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/communityTagBtn" />
+
+            <Button
+                android:id="@+id/familyTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Family"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/entertainmentTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/cultureTagBtn" />
+
+            <Button
+                android:id="@+id/entertainmentTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Entertainment"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/familyTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/educationTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/competitionTagBtn" />
+
+            <Button
+                android:id="@+id/communityTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Community"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/competitionTagBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/amusementTagBtn" />
+
+            <Button
+                android:id="@+id/cultureTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Culture/History"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/competitionTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/collegeTagBtn" />
+
+            <Button
+                android:id="@+id/competitionTagBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="Competition"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/cultureTagBtn"
+                app:layout_constraintStart_toEndOf="@+id/communityTagBtn"
+                app:layout_constraintTop_toBottomOf="@+id/artTagBtn" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

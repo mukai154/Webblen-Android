@@ -29,15 +29,14 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".HomeActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
@@ -77,7 +76,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SelectEventCategoriesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".EventPricingActivity"
             android:screenOrientation="portrait" />
@@ -110,7 +115,8 @@
         </activity>
         <activity android:name=".WalletActivity" />
         <activity android:name=".SetupActivity" />
-        <activity android:name=".TermsConditionsActivity"></activity>
+        <activity android:name=".TermsConditionsActivity" />
+        <activity android:name=".EventInfoActivity"></activity>
     </application>
 
 </manifest>
