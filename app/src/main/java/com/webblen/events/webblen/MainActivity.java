@@ -6,9 +6,11 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
@@ -21,9 +23,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,8 +43,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.twitter.sdk.android.core.SessionManager;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -47,15 +58,33 @@ import com.twitter.sdk.android.core.TwitterSession;
 import java.io.IOException;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    //Firebase
+    private StorageReference storageReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
+    private String user_id;
+
     //Menu
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle menuToggle;
+    private View menuHeader;
+
+
+    //Image & Name
+    private CircleImageView userMainPic;
+    private Uri mainImageURI = null;
+    private TextView usernameMainText;
+    private TextView accountValText;
+
+    private ProgressBar menuProgressBar;
 
     //Map
     private GoogleMap mMap;
@@ -67,29 +96,51 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     int PROXIMITY_RADIUS = 10000;
     double latitude,longitude;
 
-    //Firebase
-    private FirebaseAuth mAuth;
+    private ProgressBar mapProgressBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_action_bar);
+        setSupportActionBar(toolbar);
 
+        //Action button for going to create activity
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.eventTableFAB);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent eventTableIntent = new Intent(MainActivity.this, EventTableActivity.class);
+                startActivity(eventTableIntent);
+            }
+        });
 
-        //***** Initialize
+        //** INITIALIZE
 
         //Firebase
-        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        user_id = firebaseAuth.getCurrentUser().getUid();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         //Menu
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         menuToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_menu, R.string.close_menu);
+        menuHeader = navigationView.getHeaderView(0);
+        userMainPic = (CircleImageView) menuHeader.findViewById(R.id.userMainPic);
+        usernameMainText = (TextView) menuHeader.findViewById(R.id.usernameMainText);
+        accountValText = (TextView) menuHeader.findViewById(R.id.accountValText);
+        menuProgressBar = (ProgressBar) menuHeader.findViewById(R.id.menuProgressBar);
+
 
         drawerLayout.addDrawerListener(menuToggle);
         menuToggle.syncState();
         getSupportActionBar().setTitle("Webblen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -127,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     case(R.id.logoutMenuButton):
                         drawerLayout.closeDrawers();
-                        mAuth.signOut();
+                        firebaseAuth.signOut();
                         LoginManager.getInstance().logOut();
                         SessionManager<TwitterSession> sessionManager = TwitterCore.getInstance().getSessionManager();
                         if (sessionManager.getActiveSession() != null){
@@ -140,11 +191,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        loadFirestoreData();
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            checkLocationPermission();
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//            if (checkLocationPermission()){
+//
+//            }
+//        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -273,13 +326,101 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+    //Load User Data
+    private void loadFirestoreData() {
+
+        firebaseFirestore.collection("users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.isSuccessful()){
+
+                    if(task.getResult().exists()){
+
+                        String username = task.getResult().getString("username");
+                        String profile_pic = task.getResult().getString("profile_pic");
+
+                        //If username or pic is null...
+                        if (username == null || profile_pic == null){
+                            Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                            startActivity(setupIntent);
+                            finish();
+                        } else {
+
+                            mainImageURI = Uri.parse(profile_pic);
+                            usernameMainText.setText("@" + username);
+                            Glide.with(MainActivity.this).load(profile_pic).into(userMainPic);
+
+                            userMainPic.setVisibility(View.VISIBLE);
+                            usernameMainText.setVisibility(View.VISIBLE);
+                            accountValText.setVisibility(View.VISIBLE);
+                            menuProgressBar.setVisibility(View.INVISIBLE);
+
+                        }
+                    }
+
+                } else {
+
+                    String error = task.getException().getMessage();
+                    Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+    }
+
+    //Load Event Data
+//    private void loadEventData() {
+//
+//        firebaseFirestore.collection("users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                if(task.isSuccessful()){
+//
+//                    if(task.getResult().exists()){
+//
+//                        String username = task.getResult().getString("username");
+//                        String profile_pic = task.getResult().getString("profile_pic");
+//
+//                        //If username or pic is null...
+//                        if (username == null || profile_pic == null){
+//                            Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+//                            startActivity(setupIntent);
+//                            finish();
+//                        } else {
+//
+//                            mainImageURI = Uri.parse(profile_pic);
+//                            usernameMainText.setText("@" + username);
+//                            Glide.with(MainActivity.this).load(profile_pic).into(userMainPic);
+//
+//                            userMainPic.setVisibility(View.VISIBLE);
+//                            usernameMainText.setVisibility(View.VISIBLE);
+//                            menuProgressBar.setVisibility(View.INVISIBLE);
+//
+//                        }
+//                    }
+//
+//                } else {
+//
+//                    String error = task.getException().getMessage();
+//                    Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+//
+//                }
+//
+//            }
+//        });
+//    }
+
     //** Authentication Methods and Handling
     @Override
     public void onStart(){
         //Check if Firebase user is signed in and act accordingly
         super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         if (currentUser == null){
             logoutUser();

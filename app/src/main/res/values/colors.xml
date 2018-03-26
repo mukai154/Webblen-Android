@@ -12,5 +12,6 @@
     <color name="offWhite">#eceeed</color>
     <color name="offWhiteBack">#e8e9e8</color>
     <color name="interestSelected">#FFC107</color>
+    <color name="colorPeach">#FFCC80</color>
 
 </resources>

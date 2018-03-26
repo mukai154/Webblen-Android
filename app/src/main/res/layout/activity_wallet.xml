@@ -19,27 +19,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/userProfilePic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="32dp"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/userWalletPic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/user_profile"
+                android:visibility="invisible"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/user_profile" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/usernameText"
+                android:id="@+id/usernameWalletText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/username_placeholder"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userProfilePic" />
+                app:layout_constraintTop_toBottomOf="@+id/userWalletPic" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/eventParticipationLayout"
@@ -49,7 +54,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameText">
+                app:layout_constraintTop_toBottomOf="@+id/usernameWalletText">
 
                 <ImageView
                     android:id="@+id/midLine"
@@ -108,6 +113,15 @@
                     app:layout_constraintStart_toEndOf="@+id/midLine"
                     app:layout_constraintTop_toBottomOf="@+id/eventsCreatedHead" />
             </android.support.constraint.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/walletProgressBar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -144,14 +158,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/webblenText" />
 
-            <Spinner
+            <ImageButton
                 android:id="@+id/wbblnSpinner"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/sort_down" />
 
             <TextView
                 android:id="@+id/webblenAmount"
@@ -185,14 +202,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/webPowerSpinner"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
+            <ImageButton
                 android:id="@+id/webPowerSpinner"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/sort_down" />
 
             <TextView
                 android:id="@+id/webPowerText"
@@ -209,7 +229,7 @@
                 android:id="@+id/webPowerDescText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
@@ -233,13 +253,11 @@
                 android:id="@+id/webDollarDescText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/webDollarDesc"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView12"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/webDollars" />
@@ -249,20 +267,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:text="WEB DOLLARS"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/spinner3"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
+            <ImageButton
+                android:id="@+id/webDollarSpinner"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/sort_down" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -272,7 +293,7 @@
                 android:text="$0.00"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinner3"
+                app:layout_constraintEnd_toStartOf="@+id/webDollarSpinner"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
@@ -320,7 +341,7 @@
                 android:layout_marginTop="12dp"
                 android:text="0.000 WBLN"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/spinner4"
+                app:layout_constraintEnd_toStartOf="@+id/savingsWblnSpinner"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -332,25 +353,32 @@
                 android:text="$0.00"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinner5" />
+                app:layout_constraintEnd_toStartOf="@+id/savingsWbDllrSpinner" />
 
-            <Spinner
-                android:id="@+id/spinner5"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_marginBottom="8dp"
+            <ImageButton
+                android:id="@+id/savingsWbDllrSpinner"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="14dp"
                 android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinner4"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:srcCompat="@drawable/sort_down" />
+
+            <ImageButton
+                android:id="@+id/savingsWblnSpinner"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/sort_down" />
+
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout

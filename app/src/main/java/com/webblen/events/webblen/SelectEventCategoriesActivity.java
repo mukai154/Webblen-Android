@@ -1,5 +1,6 @@
 package com.webblen.events.webblen;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class SelectEventCategoriesActivity extends AppCompatActivity {
     private Button wineBrewTagBtn;
 
     //Selected Tags
-    private List selectedTags = new ArrayList();
+    private List<String> selectedTags = new ArrayList<String>();
 
     //Set Btn
     private Button setTagsBtn;
@@ -473,6 +474,22 @@ public class SelectEventCategoriesActivity extends AppCompatActivity {
         });
 
         //SEND DATA BACK
+        setTagsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (selectedTags.isEmpty()){
+                    Toast.makeText(SelectEventCategoriesActivity.this, "Please Choose At Least One Tag", Toast.LENGTH_LONG).show();
+                } else {
+                    String [] tagArray = selectedTags.toArray(new String[selectedTags.size()]);
+                    Intent returnTagDataIntent = new Intent();
+                    returnTagDataIntent.putExtra("selectedTags", tagArray);
+                    setResult(RESULT_OK, returnTagDataIntent);
+                    finish();
+                }
+
+            }
+        });
 
     }
 }

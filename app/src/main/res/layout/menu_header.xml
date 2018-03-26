@@ -7,18 +7,19 @@
     android:layout_height="100dp"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/userMainPic"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:src="@drawable/transparent_logo"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/transparent_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/headerUsername"
+        android:id="@+id/usernameMainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -26,17 +27,29 @@
         android:text="@string/username_placeholder"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/userMainPic"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/accountValueHeader"
+        android:id="@+id/accountValText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
         android:text="Account Value: $0.00"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/headerUsername" />
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/userMainPic"
+        app:layout_constraintTop_toBottomOf="@+id/usernameMainText" />
+
+    <ProgressBar
+        android:id="@+id/menuProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:progressTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

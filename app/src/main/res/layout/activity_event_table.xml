@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.webblen.events.webblen.EventTableActivity">
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Events"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:srcCompat="@color/colorDarkGray" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thisWeekTableBtn"
+        app:srcCompat="@color/colorLightGray" />
+
+    <TextView
+        android:id="@+id/todayTableBtn"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border_orange"
+        android:paddingTop="6dp"
+        android:text="Today"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/tomorrowTableBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tomorrowTableBtn"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border_light_gray"
+        android:paddingTop="6dp"
+        android:text="Tomorrow"
+        android:textAlignment="center"
+        android:textColor="@color/colorLightGray"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/thisWeekTableBtn"
+        app:layout_constraintStart_toEndOf="@+id/todayTableBtn"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/thisWeekTableBtn"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border_light_gray"
+        android:paddingTop="6dp"
+        android:text="This Week"
+        android:textAlignment="center"
+        android:textColor="@color/colorLightGray"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/thisMonthTableBtn"
+        app:layout_constraintStart_toEndOf="@+id/tomorrowTableBtn"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/thisMonthTableBtn"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border_light_gray"
+        android:paddingTop="6dp"
+        android:text="This Month"
+        android:textAlignment="center"
+        android:textColor="@color/colorLightGray"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/laterTableBtn"
+        app:layout_constraintStart_toEndOf="@+id/thisWeekTableBtn"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/laterTableBtn"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border_light_gray"
+        android:paddingTop="6dp"
+        android:text="Later"
+        android:textAlignment="center"
+        android:textColor="@color/colorLightGray"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/thisMonthTableBtn"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+</android.support.constraint.ConstraintLayout>
