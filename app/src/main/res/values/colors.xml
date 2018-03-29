@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#ff9100</color>
     <color name="colorAccent">#ff5722</color>
     <color name="colorDarkGray">#424242</color>
-    <color name="colorLightGray">#bdbdbd</color>
+    <color name="colorLightGray">#d7d7d7</color>
     <color name="accent_material_light_1">#e0e0e0</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorFBBlue">#3B5998</color>
@@ -12,6 +12,6 @@
     <color name="offWhite">#eceeed</color>
     <color name="offWhiteBack">#e8e9e8</color>
     <color name="interestSelected">#FFC107</color>
-    <color name="colorPeach">#FFCC80</color>
+    <color name="colorPeach">#ffcc80</color>
 
 </resources>

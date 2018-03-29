@@ -44,6 +44,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/user_event_stats_back"
             android:ems="10"
+            android:maxLength="20"
             android:hint="Title"
             android:inputType="textPersonName"
             android:padding="5dp"

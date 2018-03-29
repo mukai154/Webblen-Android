@@ -585,7 +585,7 @@
         <!--Submit Btn-->
 
         <Button
-            android:id="@+id/updateInterestsBtn"
+            android:id="@+id/submitInterestsBtn"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

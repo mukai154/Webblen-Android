@@ -157,14 +157,14 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
             public void onClick(View v) {
                 Double lat = latitude;
                 Double lon = longitude;
-                int eventRadius = radius;
+                int eventRadius = Integer.getInteger(notifRadiusText.getText().toString());
                 if (lat == null || lon == null || address == null){
                     Toast.makeText(SelectLocationActivity.this, "Please Set a Location", Toast.LENGTH_LONG).show();
                 } else {
                     Intent returnLocationDataIntent = new Intent();
                     returnLocationDataIntent.putExtra("lat", lat);
                     returnLocationDataIntent.putExtra("lon", lon);
-                    returnLocationDataIntent.putExtra("radius", radius);
+                    returnLocationDataIntent.putExtra("radius", eventRadius);
                     returnLocationDataIntent.putExtra("address", address);
                     setResult(RESULT_OK, returnLocationDataIntent);
                     finish();

@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -34,12 +35,16 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -53,6 +58,7 @@ public class SetupActivity extends AppCompatActivity {
     //Image & Name
     private CircleImageView setupProfilePic;
     private Uri mainImageURI = null;
+    private Bitmap compressedImageFile;
     private EditText setupUsername;
 
     private boolean didChange = false;
@@ -114,28 +120,36 @@ public class SetupActivity extends AppCompatActivity {
                     Toast.makeText(SetupActivity.this, "Profile Pic Required", Toast.LENGTH_LONG).show();
                 } else {
 
-                    //Upload Username & Profile Pic
+                    //Compress and Upload
                     setupProgress.setVisibility(View.VISIBLE);
-                    StorageReference image_path = storageReference.child("profile_pics").child(user_id + ".jpg");
 
+                    //Compress Image
+                    File profileImgFile = new File(mainImageURI.getPath());
+                    try {
+                        compressedImageFile = new Compressor(SetupActivity.this).setQuality(85).compressToBitmap(profileImgFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imgData = baos.toByteArray();
 
+                    //Upload Img & Name
+                    UploadTask setupUpload = storageReference.child("profile_pics").child(user_id + ".jpg").putBytes(imgData);
 
-                    image_path.putFile(mainImageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    setupUpload.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if (task.isSuccessful()) {
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri download_uri = taskSnapshot.getDownloadUrl();
+                            storeToFirestore(user_name, download_uri.toString());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            String error = e.getMessage();
+                            Toast.makeText(SetupActivity.this, "(Setup Error) : " + error, Toast.LENGTH_LONG).show();
 
-                                Uri download_uri = task.getResult().getDownloadUrl();
-                                storeToFirestore(user_name, download_uri.toString());
-
-                            } else {
-
-                                String error = task.getException().getMessage();
-                                Toast.makeText(SetupActivity.this, "(Setup Error) : " + error, Toast.LENGTH_LONG).show();
-
-                                setupProgress.setVisibility(View.INVISIBLE);
-
-                            }
+                            setupProgress.setVisibility(View.INVISIBLE);
                         }
                     });
                 }

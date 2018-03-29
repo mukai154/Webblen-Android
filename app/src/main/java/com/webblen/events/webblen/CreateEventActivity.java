@@ -1,6 +1,8 @@
 package com.webblen.events.webblen;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -23,7 +25,14 @@ import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.UUID;
+
+import id.zelory.compressor.Compressor;
+
 public class CreateEventActivity extends AppCompatActivity {
+
 
     //Firebase
     private StorageReference storageReference;
@@ -36,6 +45,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
     //Image
     private Uri mainImageURI = null;
+    private static final int MAX_LENGTH = 100;
+    private Compressor imgCompressor;
 
     //New Event Form
     private EditText eventTitleText;
@@ -43,6 +54,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText eventDescriptionText;
     private String eventDescription;
     private ImageButton addImgBtn;
+    private boolean didAddImg = false;
     private Button dateTimeBtn;
     private String eventDate;
     private String eventTime;
@@ -56,7 +68,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private Boolean event21 = false;
     private Boolean notificationOnly = false;
     private Button catBtn;
-    private String[] eventCategories;
+    private ArrayList<String> eventCategories;
     private String listCategories;
     private TextView eventPriceText;
     private String eventPrice;
@@ -145,23 +157,48 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 String address = locationBtn.getText().toString();
                 String author = current_username;
-                String[] categories = new String[0];
+                ArrayList<String> categories = eventCategories;
                 String date = eventDate;
                 String description = eventDescriptionText.getText().toString();
                 Integer distanceFromUser = 0;
-                String eventKey;
+                String eventKey = UUID.randomUUID().toString();
                 Double lat = eventLat;
                 Double lon = eventLon;
                 boolean paid = false;
-                String pathToImage;
+                String pathToImage = "";
                 String title = eventTitleText.getText().toString();
                 Integer views = 0;
 
+                if (address.toLowerCase().contains("location")){
+                    Toast.makeText(CreateEventActivity.this, "Please Set a Location", Toast.LENGTH_LONG).show();
+                } else if (categories == null){
+                    Toast.makeText(CreateEventActivity.this, "Please Set Categories", Toast.LENGTH_LONG).show();
+                } else if (eventDate == null){
+                    Toast.makeText(CreateEventActivity.this, "Please Set Date", Toast.LENGTH_LONG).show();
+                } else if (description == null || description.isEmpty()){
+                    Toast.makeText(CreateEventActivity.this, "Please Set Description", Toast.LENGTH_LONG).show();
+                } else if (description.length() < 20){
+                    Toast.makeText(CreateEventActivity.this, "Please Be More Descriptive About the Event", Toast.LENGTH_LONG).show();
+                } else if (lat == null || lon == null){
+                    Toast.makeText(CreateEventActivity.this, "Please Set a Location", Toast.LENGTH_LONG).show();
+                } else if (title == null || title.isEmpty()){
+                    Toast.makeText(CreateEventActivity.this, "Please Set a Title", Toast.LENGTH_LONG).show();
+                } else if (!didAddImg){
+                    Toast.makeText(CreateEventActivity.this, "Please Add an Image", Toast.LENGTH_LONG).show();
+                } else {
 
+                    WebblenEvent newEvent = new WebblenEvent(address, author, categories,
+                            date, description, distanceFromUser,
+                            event18, event21, eventKey,
+                            lat, lon, notificationOnly,
+                            pathToImage, radius, eventTime,
+                            title, views);
 
-
-                Intent reviewIntent = new Intent(CreateEventActivity.this, PurchaseEventActivity.class);
-                startActivity(reviewIntent);
+                    Intent reviewIntent = new Intent(CreateEventActivity.this, PurchaseEventActivity.class);
+                    reviewIntent.putExtra("mainImageUri", mainImageURI.toString());
+                    reviewIntent.putExtra("WebblenEvent", newEvent);
+                    startActivity(reviewIntent);
+                }
             }
         });
     }
@@ -209,6 +246,7 @@ public class CreateEventActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 mainImageURI = result.getUri();
                 addImgBtn.setImageURI(mainImageURI);
+                didAddImg = true;
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -256,10 +294,10 @@ public class CreateEventActivity extends AppCompatActivity {
 
         if (requestCode == 4) {
             if(resultCode == RESULT_OK) {
-                eventCategories = data.getStringArrayExtra("selectedTags");
-                int catLength = eventCategories.length;
+                eventCategories = data.getStringArrayListExtra("selectedTags");
+                int catLength = eventCategories.size();
                 for (int i = 0; i < catLength; i++) {
-                    String indexCat = eventCategories[i];
+                    String indexCat = eventCategories.get(i);
                     if (indexCat.contains("COLLEGELIFE")){
                         indexCat = "COLLEGE LIFE";
                     } else if (indexCat.contains("FOODDRINK")){
@@ -283,5 +321,17 @@ public class CreateEventActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    public static String random() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(MAX_LENGTH);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
     }
 }
