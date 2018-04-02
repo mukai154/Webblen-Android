@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         checkLocationPermission();
+        getLastUserLocation();
         //** INITIALIZE
 
         //Firebase
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user_id = firebaseAuth.getCurrentUser().getUid();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+
 
         //UI
         navBarBtm = (ConstraintLayout) findViewById(R.id.navBottom);
@@ -243,10 +245,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         drawerLayout.closeDrawers();
                         firebaseAuth.signOut();
                         LoginManager.getInstance().logOut();
-                        SessionManager<TwitterSession> sessionManager = TwitterCore.getInstance().getSessionManager();
-                        if (sessionManager.getActiveSession() != null){
-                            sessionManager.clearActiveSession();
-                        }
+                        TwitterCore.getInstance().getSessionManager().clearActiveSession();
                         logoutUser();
                         break;
                 }
@@ -364,8 +363,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if(task.isSuccessful()){
                             Log.d("LOCATION STATUS", "onComplete: found location!");
                             currentLocation = (Location) task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+                            if (currentLocation != null) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+                            }
 
                         }else{
                             //Log.d(TAG, "onComplete: current location is null");

@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class OnboardingActivity extends AppCompatActivity {
 
     private ViewPager slideViewPager;
@@ -18,6 +21,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private SliderAdapter slideAdapter;
 
     private TextView[] dots;
+    private FirebaseAuth firebaseAuth;
 
     private Button nextBtn;
     private Button backBtn;
@@ -27,6 +31,9 @@ public class OnboardingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
+
+        //Firebase
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Layout Initialization
         slideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
@@ -123,5 +130,25 @@ public class OnboardingActivity extends AppCompatActivity {
         public void onPageScrollStateChanged(int state) {
         }
     };
+
+    //** Authentication Methods and Handling
+    @Override
+    public void onStart(){
+        //Check if Firebase user is signed in and act accordingly
+        super.onStart();
+
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        if (currentUser != null){
+            loginUser();
+        }
+
+    }
+
+    private void loginUser(){
+        Intent loginIntent = new Intent(OnboardingActivity.this, MainActivity.class);
+        startActivity(loginIntent);
+        finish();
+    }
 
 }
