@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.webblen.events.webblen.Adapter.ListItemAdapter;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -58,9 +59,9 @@ public class EventTableActivity extends AppCompatActivity {
 
 
     //Recycler
-    private WebblenTableFragment webblenTableFragment;
-    private RecyclerView eventRecyclerView;
-    private WebblenEventRecyclerAdapter webblenEventRecyclerAdapter;
+    RecyclerView eventRecyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    ListItemAdapter adapter;
 
 
     //Tabs
@@ -92,10 +93,6 @@ public class EventTableActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //Fragment
-        webblenTableFragment = new WebblenTableFragment();
-        initializeFragment();
-
 
         //UI
         todayTableBtn = (TextView) findViewById(R.id.todayTableBtn);
@@ -103,12 +100,15 @@ public class EventTableActivity extends AppCompatActivity {
         thisWeekTableBtn = (TextView) findViewById(R.id.thisWeekTableBtn);
         thisMonthTableBtn = (TextView) findViewById(R.id.thisMonthTableBtn);
         laterTableBtn = (TextView) findViewById(R.id.laterTableBtn);
-//        eventRecyclerView = (RecyclerView) findViewById(R.id.eventListView);
-//        webblenEventRecyclerAdapter = new WebblenEventRecyclerAdapter(currentEventList);
-//        eventRecyclerView.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
-//        eventRecyclerView.setAdapter(webblenEventRecyclerAdapter);
-//        eventRecyclerView.setHasFixedSize(true);
+        eventRecyclerView = (RecyclerView) findViewById(R.id.eventRecyclerView);
+        eventRecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        eventRecyclerView.setLayoutManager(layoutManager);
+        adapter = new ListItemAdapter(currentEventList);
+        eventRecyclerView.setAdapter(adapter);
 
+
+        loadFirestoreData();
 
         //Tab Btn Listeners
         todayTableBtn.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +131,9 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setBackgroundResource(R.drawable.border_light_gray);
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
-                webblenTableFragment.changeLists("today");
+                currentEventList = todayEventList;
+                adapter.notifyDataSetChanged();
+
             }
         });
 
@@ -155,7 +157,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setBackgroundResource(R.drawable.border_light_gray);
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
-                webblenTableFragment.changeLists("tomorrow");
+                currentEventList = tomorrowEventList;
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -179,7 +182,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setBackgroundResource(R.drawable.border_light_gray);
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
-                webblenTableFragment.changeLists("thisWeek");
+                currentEventList = thisWeekEventList;
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -203,7 +207,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setBackgroundResource(R.drawable.border_light_gray);
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
-                webblenTableFragment.changeLists("thisMonth");
+                currentEventList = thisMonthEventList;
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -227,19 +232,15 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setBackgroundResource(R.drawable.border_orange);
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-                webblenTableFragment.changeLists("later");
+                currentEventList = laterEventList;
+                adapter.notifyDataSetChanged();
             }
         });
 
-        //loadFirestoreData();
+
 
     }
 
-    private void initializeFragment(){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.tableContainer, webblenTableFragment);
-        fragmentTransaction.commit();
-    }
 
     private int getDifferenceDays(Date d1, Date d2) {
         int daysdiff = 0;
@@ -350,8 +351,9 @@ public class EventTableActivity extends AppCompatActivity {
                                           }
                                       }
 
+                                      // TO DO: FIND AUTH IMG
                                       currentEventList = todayEventList;
-                                      webblenEventRecyclerAdapter.notifyDataSetChanged();
+                                      adapter.notifyDataSetChanged();
 
                                   } else {
                                       Toast.makeText(EventTableActivity.this, "Load Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();

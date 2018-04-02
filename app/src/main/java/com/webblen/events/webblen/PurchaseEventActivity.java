@@ -76,7 +76,7 @@ public class PurchaseEventActivity extends AppCompatActivity implements BillingP
         previewUsername.setText(username);
         previewCat = (ImageView) findViewById(R.id.previewCat);
         String interestImgName = newEvent.getCategories().get(0).toUpperCase();
-        previewCat.setImageDrawable(getDrawable(categoryToDrawable(interestImgName)));
+        previewCat.setImageDrawable(getDrawable(Utilities.categoryToDrawable(interestImgName)));
         previewTitle = (TextView) findViewById(R.id.previewTitle);
         previewTitle.setText(newEvent.getTitle());
         previewDesc = (TextView) findViewById(R.id.previewDescription);
@@ -84,7 +84,7 @@ public class PurchaseEventActivity extends AppCompatActivity implements BillingP
 
         //Dates
         String[] dateParts = newEvent.getDate().split("/");
-        String month = getMonth(dateParts[2]);
+        String month = Utilities.getMonth(dateParts[2]);
         previewDayofMonth = (TextView) findViewById(R.id.previewDay);
         previewDayofMonth.setText(dateParts[1]);
         previewMonth = (TextView) findViewById(R.id.previewMonth);
@@ -96,7 +96,7 @@ public class PurchaseEventActivity extends AppCompatActivity implements BillingP
         String notifyString = "Notify Those Within " + eventRadius + " Meters";
         previewRadius.setText(notifyString);
         eventPrice = (TextView) findViewById(R.id.eventPrice);
-        String price = "Total: $" + getPrice(eventRadius);
+        String price = "Total: $" + Utilities.getPrice(eventRadius);
         eventPrice.setText(price);
         purchaseProgressBar = (ProgressBar) findViewById(R.id.purchaseProgressBar);
         confirmPurchaseBtn = (Button) findViewById(R.id.confirmPurchaseBtn);
@@ -128,113 +128,6 @@ public class PurchaseEventActivity extends AppCompatActivity implements BillingP
                 }
             }
         });
-    }
-
-    private String getPrice(int eventRadius) {
-        if (eventRadius == 250){
-            return "2.99";
-        } else if (eventRadius > 250 && eventRadius < 400){
-            return "4.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "9.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "14.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "19.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "24.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "26.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "29.99";
-        } else if (eventRadius > 375 && eventRadius < 600){
-            return "34.99";
-        } else {
-            return "0.00";
-        }
-    }
-
-    private String getMonth(String datePart) {
-        switch (datePart){
-            case "01":
-                return "JAN";
-            case "02":
-                return "FEB";
-            case "03":
-                return "MAR";
-            case "04":
-                return "APR";
-            case "05":
-                return "MAY";
-            case "06":
-                return "JUN";
-            case "07":
-                return "JUL";
-            case "08":
-                return "AUG";
-            case "09":
-                return "SEP";
-            case "10":
-                return "OCT";
-            case "11":
-                return "NOV";
-            case "12":
-                return "DEC";
-            default:
-                return "MAR";
-        }
-    }
-
-    //Get Drawable from Name
-    public static int categoryToDrawable(String category){
-
-        switch (category){
-            case "ART":
-                return R.drawable.art;
-            case "MUSIC":
-                return R.drawable.music;
-            case "FOODDRINK":
-                return R.drawable.fooddrink;
-            case "SPORTS":
-                return R.drawable.sports;
-            case "COMMUNITY":
-                return R.drawable.community;
-            case "HEALTHFITNESS":
-                return R.drawable.healthfitness;
-            case "FAMILY":
-                return R.drawable.family;
-            case "ENTERTAINMENT":
-                return R.drawable.entertainment;
-            case "TECHNOLOGY":
-                return R.drawable.technology;
-            case "OUTDOORS":
-                return R.drawable.outdoors;
-            case "GAMING":
-                return R.drawable.gaming;
-            case "COMPETITION":
-                return R.drawable.competition;
-            case "NETWORKING":
-                return R.drawable.networking;
-            case "THEATRE":
-                return R.drawable.theatre;
-            case "CULTURE":
-                return R.drawable.culture;
-            case "SHOPPING":
-                return R.drawable.shopping;
-            case "AMUSEMENT":
-                return R.drawable.amusement;
-            case "EDUCATION":
-                return R.drawable.education;
-            case "COLLEGELIFE":
-                return R.drawable.collegelife;
-            case "WINEBREW":
-                return R.drawable.winebrew;
-            case "PARTYDANCE":
-                return R.drawable.partydance;
-            default:
-                return R.drawable.amusement;
-        }
-
     }
 
     // IBillingHandler implementation

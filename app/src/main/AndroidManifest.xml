@@ -105,7 +105,8 @@
         <activity android:name=".WalletActivity" />
         <activity android:name=".SetupActivity" />
         <activity android:name=".TermsConditionsActivity" />
-        <activity android:name=".EventInfoActivity" />
+        <activity android:name=".EventInfoActivity"
+                  android:theme="@style/ShowEventTheme"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

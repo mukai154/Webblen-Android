@@ -26,17 +26,18 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toTopOf="@+id/navBottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/main_action_bar" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/navBottom"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="?android:attr/colorBackground"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -158,14 +159,30 @@
             android:id="@+id/eventTableFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
             android:clickable="true"
             app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/navBottom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_action_bar"
             app:rippleColor="@color/colorWhite"
             app:srcCompat="@drawable/calendar_icon" />
+
+        <ProgressBar
+            android:id="@+id/mapProgress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/navBottom" />
 
     </android.support.constraint.ConstraintLayout>
 

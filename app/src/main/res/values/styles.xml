@@ -22,4 +22,11 @@
         <item name="colorAccent">@color/colorLightGray</item>
     </style>
 
+    <!-- Theme Used For Event Info -->
+    <style name="ShowEventTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkGray</item>
+        <item name="colorAccent">@color/colorDarkGray</item>
+    </style>
+
 </resources>
