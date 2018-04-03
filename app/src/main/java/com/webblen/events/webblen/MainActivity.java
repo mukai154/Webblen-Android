@@ -222,9 +222,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(createEventIntent);
                         break;
                     case(R.id.myEventsMenuButton):
-                        Intent myEventsIntent = new Intent(MainActivity.this, MyEventsActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(myEventsIntent);
+//                        Intent myEventsIntent = new Intent(MainActivity.this, MyEventsActivity.class);
+//                        drawerLayout.closeDrawers();
+//                        startActivity(myEventsIntent);
+                        Toast.makeText(MainActivity.this, "Temporarily Unavailable", Toast.LENGTH_SHORT).show();
                         break;
                     case(R.id.walletMenuOption):
                         Intent walletIntent = new Intent(MainActivity.this, WalletActivity.class);
@@ -237,9 +238,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(settingsIntent);
                         break;
                     case(R.id.contactMenuButton):
-                        Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(intent);
+//                        Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
+//                        drawerLayout.closeDrawers();
+//                        startActivity(intent);
+                        String url = "https://www.webblen.io";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
                         break;
                     case(R.id.logoutMenuButton):
                         drawerLayout.closeDrawers();
@@ -301,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
 
         if (locationGranted) {
