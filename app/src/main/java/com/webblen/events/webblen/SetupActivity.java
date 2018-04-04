@@ -115,7 +115,7 @@ public class SetupActivity extends AppCompatActivity {
                 } else if (user_name.length() > 20){
                     Toast.makeText(SetupActivity.this, "Username Cannot Be More Than 20 Characters Long", Toast.LENGTH_LONG).show();
                 } else if (checkIfUsernameExists(user_name)){
-                    //Do Nothing
+                    Toast.makeText(SetupActivity.this, "Username Not Available", Toast.LENGTH_LONG).show();
                 } else if (mainImageURI == null){
                     Toast.makeText(SetupActivity.this, "Profile Pic Required", Toast.LENGTH_LONG).show();
                 } else {
@@ -167,7 +167,6 @@ public class SetupActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         user_exists = true;
-                        Toast.makeText(SetupActivity.this, "Username Not Available", Toast.LENGTH_LONG).show();
                     } else {
                         user_exists = false;
                     }

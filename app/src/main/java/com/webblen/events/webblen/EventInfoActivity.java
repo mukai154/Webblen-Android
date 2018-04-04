@@ -120,14 +120,14 @@ public class EventInfoActivity extends AppCompatActivity {
                 });
     }
 
-    private void getEventAuthorFirestoreData(String author){
+    private void getEventAuthorFirestoreData(final String author){
         firebaseFirestore.collection("usernames").document(author).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     String author_uid = task.getResult().getString("uid");
-
-                    firebaseFirestore.collection("users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    Log.d("EVENT AUTHOR UID", author);
+                    firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
@@ -140,8 +140,9 @@ public class EventInfoActivity extends AppCompatActivity {
 
                                     //pic is null...
                                     if (profile_pic == null){
-
-                                        eventAuthImg.setMaxWidth(1);
+                                        ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) eventAuthImg.getLayoutParams();
+                                        params.width = 1;
+                                        eventAuthImg.setLayoutParams(params);
                                         eventAuthImg.setVisibility(View.INVISIBLE);
 
                                     } else {

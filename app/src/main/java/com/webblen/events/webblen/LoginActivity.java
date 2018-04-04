@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         fbLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginProgressBar.setVisibility(View.VISIBLE);
                 fbLoginBtn.setEnabled(false);
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
                 LoginManager.getInstance().registerCallback(fbCallbackManager, new FacebookCallback<LoginResult>() {
@@ -152,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(FacebookException error) {
                         Log.d("FBLog", "facebook:onError", error);
-                        // ...
+                        loginProgressBar.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -162,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         twitterLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginProgressBar.setVisibility(View.VISIBLE);
                 mTwitterAuthClient.authorize(LoginActivity.this, new com.twitter.sdk.android.core.Callback<TwitterSession>(){
                     @Override
                     public void success(Result<TwitterSession> twitterSessionResult) {
@@ -171,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void failure(TwitterException e) {
                         e.printStackTrace();
+                        loginProgressBar.setVisibility(View.INVISIBLE);
                     }
                 });
             }

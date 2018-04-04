@@ -104,8 +104,10 @@
             android:id="@+id/eventInfoUserImg"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventInfoImg"
             app:srcCompat="@drawable/user_profile" />
@@ -114,12 +116,14 @@
             android:id="@+id/eventInfoUsername"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/colorTextColor"
             android:text="@string/username_placeholder"
             android:textColor="@color/colorTextColor"
             android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/eventInfoTitle"
             app:layout_constraintStart_toEndOf="@+id/eventInfoUserImg"
             app:layout_constraintTop_toTopOf="@+id/eventInfoUserImg" />
 
@@ -127,13 +131,16 @@
             android:id="@+id/eventInfoTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="1dp"
             android:background="@color/colorTextColor"
             android:text="Event Title"
             android:textColor="@color/colorTextColor"
+            android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/eventInfoUserImg"
             app:layout_constraintEnd_toStartOf="@+id/eventInfoDay"
             app:layout_constraintStart_toEndOf="@+id/eventInfoUserImg"
             app:layout_constraintTop_toBottomOf="@+id/eventInfoUsername" />
@@ -142,10 +149,10 @@
             android:id="@+id/imageView11"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventInfoTitle"
+            app:layout_constraintTop_toBottomOf="@+id/eventInfoImg"
             app:srcCompat="@color/colorLightGray" />
 
         <ImageView

@@ -32,8 +32,8 @@ public class InterestsActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
     private String user_id;
-    private Map<String, Object> userData;
     private List<String> userInterests = new ArrayList<>();
+    private List<String> newList = new ArrayList<>();
 
     //Interests & Btns
     private boolean amusement = false;
@@ -410,35 +410,12 @@ public class InterestsActivity extends AppCompatActivity {
 
     private void storeToFirebase(){
 
-
-        //Set all interests to true by default
-        Map<String, Object> nestedUserData = new HashMap<>();
-        nestedUserData.put("AMUSEMENT", amusement);
-        nestedUserData.put("ART", art);
-        nestedUserData.put("COLLEGELIFE", collegeLife);
-        nestedUserData.put("COMMUNITY", community);
-        nestedUserData.put("COMPETITION", competition);
-        nestedUserData.put("CULTURE", culture);
-        nestedUserData.put("EDUCATION", education);
-        nestedUserData.put("ENTERTAINMENT", entertainment);
-        nestedUserData.put("FAMILY", family);
-        nestedUserData.put("FOODDRINK", foodDrink);
-        nestedUserData.put("GAMING", gaming);
-        nestedUserData.put("HEALTHFITNESS", healthFitness);
-        nestedUserData.put("MUSIC", music);
-        nestedUserData.put("NETWORKING", networking);
-        nestedUserData.put("OUTDOORS", outdoors);
-        nestedUserData.put("PARTYDANCE", partyDance);
-        nestedUserData.put("SHOPPING", shopping);
-        nestedUserData.put("SPORTS", sports);
-        nestedUserData.put("TECHNOLOGY", technology);
-        nestedUserData.put("THEATRE", theatre);
-        nestedUserData.put("WINEBREW", wineBrew);
+        addInterestsToList();
 
 
         //Send to Firebase
         firebaseFirestore.collection("users").document(user_id)
-                .update("interests", nestedUserData)
+                .update("interests", newList)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -464,14 +441,7 @@ public class InterestsActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
 
                     if(task.getResult().exists()){
-                        userData = (Map<String, Object>) task.getResult().getData().get("interests");
-                        //loop a Map
-                        for (Map.Entry<String, Object> entry : userData.entrySet()) {
-                            boolean hasInterest = (Boolean) entry.getValue();
-                            if (hasInterest) {
-                                userInterests.add(entry.getKey().toLowerCase());
-                            }
-                        }
+                        userInterests = (ArrayList<String>) task.getResult().getData().get("interests");
                         loadedInterests();
                     }
 
@@ -488,89 +458,155 @@ public class InterestsActivity extends AppCompatActivity {
     }
 
     private void loadedInterests(){
-        if (userInterests.contains("amusement")){
+        if (userInterests.contains("AMUSEMENT")){
             amusement = true;
             amusementBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("art")){
+        if (userInterests.contains("ART")){
             art = true;
             artBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("collegelife")){
+        if (userInterests.contains("COLLEGELIFE")){
             collegeLife = true;
             collegeLifeBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("community")){
+        if (userInterests.contains("COMMUNITY")){
             community = true;
             communityBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("competition")){
+        if (userInterests.contains("COMPETITION")){
             competition = true;
             competitionBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("culture")){
+        if (userInterests.contains("CULTURE")){
             culture = true;
             cultureBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("education")){
+        if (userInterests.contains("EDUCATION")){
             education = true;
             educationBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("entertainment")){
+        if (userInterests.contains("ENTERTAINMENT")){
             entertainment = true;
             entertainmentBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("family")){
+        if (userInterests.contains("FAMILY")){
             family = true;
             familyBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("fooddrink")){
+        if (userInterests.contains("FOODDRINK")){
             foodDrink = true;
             foodDrinkBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("gaming")){
+        if (userInterests.contains("GAMING")){
             gaming = true;
             gamingBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("healthfitness")){
+        if (userInterests.contains("HEALTHFITNESS")){
             healthFitness = true;
             healthFitnessBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("music")){
+        if (userInterests.contains("MUSIC")){
             music = true;
             musicBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("networking")){
+        if (userInterests.contains("NETWORKING")){
             networking = true;
             networkingBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("outdoors")){
+        if (userInterests.contains("OUTDOORS")){
             outdoors = true;
             outdoorsBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("partydance")){
+        if (userInterests.contains("PARTYDANCE")){
             partyDance = true;
             partyDanceBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("shopping")){
+        if (userInterests.contains("SHOPPING")){
             shopping = true;
             shoppingBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("sports")){
+        if (userInterests.contains("SPORTS")){
             sports = true;
             sportsBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("technology")){
+        if (userInterests.contains("TECHNOLOGY")){
             technology = true;
             techBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("theatre")){
+        if (userInterests.contains("THEATRE")){
             theatre = true;
             theatreBtn.setBackground(getDrawable(R.drawable.border_orange));
         }
-        if (userInterests.contains("winebrew")){
+        if (userInterests.contains("WINEBREW")){
             wineBrew = true;
             wineBrewBtn.setBackground(getDrawable(R.drawable.border_orange));
+        }
+    }
+
+    private void addInterestsToList(){
+        if (amusement){
+            newList.add("AMUSEMENT");
+        }
+        if (art){
+            newList.add("ART");
+        }
+        if (collegeLife){
+            newList.add("COLLEGELIFE");
+        }
+        if (community){
+            newList.add("COMMUNITY");
+        }
+        if (competition){
+            newList.add("COMPETITION");
+        }
+        if (culture){
+            newList.add("CULTURE");
+        }
+        if (education){
+            newList.add("EDUCATION");
+        }
+        if (entertainment){
+            newList.add("ENTERTAINMENT");
+        }
+        if (family){
+            newList.add("FAMILY");
+        }
+        if (foodDrink){
+            newList.add("FOODDRINK");
+        }
+        if (gaming){
+            newList.add("GAMING");
+        }
+        if (healthFitness){
+            newList.add("HEALTHFITNESS");
+        }
+        if (music){
+            newList.add("MUSIC");
+        }
+        if (networking){
+            newList.add("NETWORKING");
+        }
+        if (outdoors){
+            newList.add("OUTDOORS");
+        }
+        if (partyDance){
+            newList.add("PARTYDANCE");
+        }
+        if (shopping){
+            newList.add("SHOPPING");
+        }
+        if (sports){
+            newList.add("SPORTS");
+        }
+        if (technology){
+            newList.add("TECHNOLOGY");
+        }
+        if (theatre){
+            newList.add("THEATRE");
+        }
+        if (wineBrew){
+            newList.add("WINEBREW");
         }
     }
 }

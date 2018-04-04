@@ -61,6 +61,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.twitter.sdk.android.core.SessionManager;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
     private String user_id;
-    private Map<String, Object> userData;
+    private ArrayList<String> userData;
     private List<String> userInterests = new ArrayList<>();
 
     //--Events
@@ -154,6 +157,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_action_bar);
         setSupportActionBar(toolbar);
+
+        //Configure Twitter SDK
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(
+                getString(R.string.twitter_key),
+                getString(R.string.twitter_secret));
+
+        TwitterConfig twitterConfig = new TwitterConfig.Builder(this)
+                .twitterAuthConfig(authConfig)
+                .build();
+
+        Twitter.initialize(twitterConfig);
 
         //Action button for going to create activity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.eventTableFAB);
@@ -453,15 +467,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         }
 
-                        userData = (Map<String, Object>) task.getResult().getData().get("interests");
-                        //loop a Map
-                        for (Map.Entry<String, Object> entry : userData.entrySet()) {
-                            boolean hasInterest = (Boolean) entry.getValue();
-                            if (hasInterest) {
-                                userInterests.add(entry.getKey());
-                            }
-                        }
+                        userData = (ArrayList<String>) task.getResult().getData().get("interests");
+                        Log.d("USER DATA: ", userData.toString());
 
+                        Log.d("USER DATA: ",userInterests.toString());
                         firebaseFirestore.collection("events").whereEqualTo("paid", true).addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -469,7 +478,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                                     if (doc.getType() == DocumentChange.Type.ADDED) {
                                         WebblenEvent webblenEvent = doc.getDocument().toObject(WebblenEvent.class);
-                                        for (String interest : userInterests) {
+                                        for (String interest : userData) {
                                             ArrayList<String> eventCategories = webblenEvent.getCategories();
                                             if (eventCategories.contains(interest)){
                                                 Log.d("ADDING EVENT", "performOrganzieByDate!");
@@ -481,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 }
                             }
                         });
-
+                        Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
                         setTabListeners();
                         navBarBtm.setVisibility(View.VISIBLE);
                         mapProgressBar.setVisibility(View.INVISIBLE);
@@ -652,19 +661,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     float distanceFromEvent = 99999999;
                     for (WebblenEvent event : todayEventList){
                         addMarkerToMap(event.getLat(), event.getLon(), event.getEventKey());
-                        //Grab Distance
-                        Location eventLocation = new Location("");
-                        eventLocation.setLatitude(event.getLat());
-                        eventLocation.setLongitude(event.getLon());
-                        float comparedDistance = currentLocation.distanceTo(eventLocation);
-                        Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
-                        if (comparedDistance < distanceFromEvent){
-                            distanceFromEvent = comparedDistance;
-                            closestToday = event;
+                        if (currentLocation != null){
+                            //Grab Distance
+                            Location eventLocation = new Location("");
+                            eventLocation.setLatitude(event.getLat());
+                            eventLocation.setLongitude(event.getLon());
+                            float comparedDistance = currentLocation.distanceTo(eventLocation);
+                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
+                            if (comparedDistance < distanceFromEvent){
+                                distanceFromEvent = comparedDistance;
+                                closestToday = event;
+                            }
                         }
                     }
-                    LatLng latLng = new LatLng(closestToday.getLat(), closestToday.getLon());
-                    moveCameraToPosition(latLng);
+
+                    if (closestToday != null){
+                        LatLng latLng = new LatLng(closestToday.getLat(), closestToday.getLon());
+                        moveCameraToPosition(latLng);
+                    } else {
+                        LatLng latLng = new LatLng(todayEventList.get(0).getLat(), todayEventList.get(0).getLon());
+                        moveCameraToPosition(latLng);
+                        Toast.makeText(MainActivity.this, "Could Not Retrieve Location", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -686,19 +705,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     float distanceFromEvent = 99999999;
                     for (WebblenEvent event : tomorrowEventList){
                         addMarkerToMap(event.getLat(), event.getLon(), event.getEventKey());
-                        //Grab Distance
-                        Location eventLocation = new Location("");
-                        eventLocation.setLatitude(event.getLat());
-                        eventLocation.setLongitude(event.getLon());
-                        float comparedDistance = currentLocation.distanceTo(eventLocation);
-                        Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
-                        if (comparedDistance < distanceFromEvent){
-                            distanceFromEvent = comparedDistance;
-                            closestTomorrow = event;
+                        if (currentLocation != null){
+                            //Grab Distance
+                            Location eventLocation = new Location("");
+                            eventLocation.setLatitude(event.getLat());
+                            eventLocation.setLongitude(event.getLon());
+                            float comparedDistance = currentLocation.distanceTo(eventLocation);
+                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
+                            if (comparedDistance < distanceFromEvent){
+                                distanceFromEvent = comparedDistance;
+                                closestTomorrow = event;
+                            }
                         }
                     }
-                    LatLng latLng = new LatLng(closestTomorrow.getLat(), closestTomorrow.getLon());
-                    moveCameraToPosition(latLng);
+
+                    if (closestTomorrow != null){
+                        LatLng latLng = new LatLng(closestTomorrow.getLat(), closestTomorrow.getLon());
+                        moveCameraToPosition(latLng);
+                    } else {
+                        LatLng latLng = new LatLng(tomorrowEventList.get(0).getLat(), tomorrowEventList.get(0).getLon());
+                        moveCameraToPosition(latLng);
+                        Toast.makeText(MainActivity.this, "Could Not Retrieve Location", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -720,19 +748,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     float distanceFromEvent = 99999999;
                     for (WebblenEvent event : thisWeekEventList){
                         addMarkerToMap(event.getLat(), event.getLon(), event.getEventKey());
-                        //Grab Distance
-                        Location eventLocation = new Location("");
-                        eventLocation.setLatitude(event.getLat());
-                        eventLocation.setLongitude(event.getLon());
-                        float comparedDistance = currentLocation.distanceTo(eventLocation);
-                        Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
-                        if (comparedDistance < distanceFromEvent){
-                            distanceFromEvent = comparedDistance;
-                            closestThisWeek = event;
+
+                        if (currentLocation != null){
+                            //Grab Distance
+                            Location eventLocation = new Location("");
+                            eventLocation.setLatitude(event.getLat());
+                            eventLocation.setLongitude(event.getLon());
+                            float comparedDistance = currentLocation.distanceTo(eventLocation);
+                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
+                            if (comparedDistance < distanceFromEvent){
+                                distanceFromEvent = comparedDistance;
+                                closestThisWeek = event;
+                            }
                         }
+
                     }
-                    LatLng latLng = new LatLng(closestThisWeek.getLat(), closestThisWeek.getLon());
-                    moveCameraToPosition(latLng);
+
+                    if (closestThisWeek != null){
+                        LatLng latLng = new LatLng(closestThisWeek.getLat(), closestThisWeek.getLon());
+                        moveCameraToPosition(latLng);
+                    } else {
+                        LatLng latLng = new LatLng(thisWeekEventList.get(0).getLat(), thisWeekEventList.get(0).getLon());
+                        moveCameraToPosition(latLng);
+                        Toast.makeText(MainActivity.this, "Could Not Retrieve Location", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -753,19 +793,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     float distanceFromEvent = 99999999;
                     for (WebblenEvent event : thisMonthEventList){
                         addMarkerToMap(event.getLat(), event.getLon(), event.getEventKey());
-                        //Grab Distance
-                        Location eventLocation = new Location("");
-                        eventLocation.setLatitude(event.getLat());
-                        eventLocation.setLongitude(event.getLon());
-                        float comparedDistance = currentLocation.distanceTo(eventLocation);
-                        Log.d("COMPARED DISTANCE This Month: ", String.valueOf(comparedDistance));
-                        if (comparedDistance < distanceFromEvent){
-                            distanceFromEvent = comparedDistance;
-                            closestThisMonth = event;
+                        if (currentLocation != null){
+                            //Grab Distance
+                            Location eventLocation = new Location("");
+                            eventLocation.setLatitude(event.getLat());
+                            eventLocation.setLongitude(event.getLon());
+                            float comparedDistance = currentLocation.distanceTo(eventLocation);
+                            Log.d("COMPARED DISTANCE This Month: ", String.valueOf(comparedDistance));
+                            if (comparedDistance < distanceFromEvent){
+                                distanceFromEvent = comparedDistance;
+                                closestThisMonth = event;
+                            }
                         }
                     }
-                    LatLng latLng = new LatLng(closestThisMonth.getLat(), closestThisMonth.getLon());
-                    moveCameraToPosition(latLng);
+                    if (closestThisMonth != null){
+                        LatLng latLng = new LatLng(closestThisMonth.getLat(), closestThisMonth.getLon());
+                        moveCameraToPosition(latLng);
+                    } else {
+                        LatLng latLng = new LatLng(thisMonthEventList.get(0).getLat(), thisMonthEventList.get(0).getLon());
+                        moveCameraToPosition(latLng);
+                        Toast.makeText(MainActivity.this, "Could Not Retrieve Location", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -787,19 +835,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     float distanceFromEvent = 99999999;
                     for (WebblenEvent event : laterEventList){
                         addMarkerToMap(event.getLat(), event.getLon(), event.getEventKey());
-                        //Grab Distance
-                        Location eventLocation = new Location("");
-                        eventLocation.setLatitude(event.getLat());
-                        eventLocation.setLongitude(event.getLon());
-                        float comparedDistance = currentLocation.distanceTo(eventLocation);
-                        Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
-                        if (comparedDistance < distanceFromEvent){
-                            distanceFromEvent = comparedDistance;
-                            closestLater = event;
+
+                        if (currentLocation != null){
+                            //Grab Distance
+                            Location eventLocation = new Location("");
+                            eventLocation.setLatitude(event.getLat());
+                            eventLocation.setLongitude(event.getLon());
+                            float comparedDistance = currentLocation.distanceTo(eventLocation);
+                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
+                            if (comparedDistance < distanceFromEvent){
+                                distanceFromEvent = comparedDistance;
+                                closestLater = event;
+                            }
                         }
                     }
-                    LatLng latLng = new LatLng(closestLater.getLat(), closestLater.getLon());
-                    moveCameraToPosition(latLng);
+
+                    if (closestLater != null){
+                        LatLng latLng = new LatLng(closestLater.getLat(), closestLater.getLon());
+                        moveCameraToPosition(latLng);
+                    } else {
+                        LatLng latLng = new LatLng(laterEventList.get(0).getLat(), laterEventList.get(0).getLon());
+                        moveCameraToPosition(latLng);
+                        Toast.makeText(MainActivity.this, "Could Not Retrieve Location", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
