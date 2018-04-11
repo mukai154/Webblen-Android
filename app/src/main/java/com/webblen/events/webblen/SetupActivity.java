@@ -182,6 +182,9 @@ public class SetupActivity extends AppCompatActivity {
 
     private void storeToFirestore(final String user_name, String image_uri){
 
+        ArrayList<String> blockedUsers = new ArrayList<>();
+        ArrayList<String> interests = new ArrayList<>();
+
         //Set Username & Profile Pic Path
         Map<String, Object> userDocData = new HashMap<>();
         userDocData.put("username", user_name);
@@ -190,33 +193,8 @@ public class SetupActivity extends AppCompatActivity {
         userDocData.put("isOver18", false);
         userDocData.put("isOver21", false);
         userDocData.put("isVerified", false);
-        userDocData.put("blockedUsers", null);
-
-        //Set all interests to true by default
-        Map<String, Object> nestedUserData = new HashMap<>();
-        nestedUserData.put("AMUSEMENT", true);
-        nestedUserData.put("ART", true);
-        nestedUserData.put("COLLEGELIFE", true);
-        nestedUserData.put("COMMUNITY", true);
-        nestedUserData.put("COMPETITION", true);
-        nestedUserData.put("CULTURE", true);
-        nestedUserData.put("EDUCATION", true);
-        nestedUserData.put("ENTERTAINMENT", true);
-        nestedUserData.put("FAMILY", true);
-        nestedUserData.put("FOODDRINK", true);
-        nestedUserData.put("GAMING", true);
-        nestedUserData.put("HEALTHFITNESS", true);
-        nestedUserData.put("MUSIC", true);
-        nestedUserData.put("NETWORKING", true);
-        nestedUserData.put("OUTDOORS", true);
-        nestedUserData.put("PARTYDANCE", true);
-        nestedUserData.put("SHOPPING", true);
-        nestedUserData.put("SPORTS", true);
-        nestedUserData.put("TECHNOLOGY", true);
-        nestedUserData.put("THEATRE", true);
-        nestedUserData.put("WINEBREW", true);
-
-        userDocData.put("interests", nestedUserData);
+        userDocData.put("blockedUsers", blockedUsers);
+        userDocData.put("interests", interests);
 
         //Send to Firebase
         firebaseFirestore.collection("users").document(user_id)

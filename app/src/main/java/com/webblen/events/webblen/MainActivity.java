@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationListener {
 
     //Firebase
-    private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
     private String user_id;
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<WebblenEvent> thisWeekEventList = new ArrayList<>();
     private List<WebblenEvent> thisMonthEventList = new ArrayList<>();
     private List<WebblenEvent> laterEventList = new ArrayList<>();
-    private DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat sourceFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Date eventDate;
     private Date currentDate = new Date();
 
@@ -181,13 +180,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         checkLocationPermission();
         getLastUserLocation();
+
         //** INITIALIZE
 
         //Firebase
         firebaseAuth = FirebaseAuth.getInstance();
         user_id = firebaseAuth.getCurrentUser().getUid();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
 
 
         //UI
@@ -201,8 +200,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         laterBtn = (ImageButton) findViewById(R.id.laterBtn);
 
         loadFirestoreData();
-
-
 
         //Menu
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -305,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     for(int i = 0; i < grantResults.length; i++){
                         if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
                             locationGranted = false;
+                            Toast.makeText(MainActivity.this, "Access to Location Denied", Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
                         }
@@ -325,7 +323,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (locationGranted) {
             getLastUserLocation();
-
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -333,7 +330,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             mMap.setMyLocationEnabled(true);
         }
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -352,7 +348,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
@@ -514,20 +509,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onStart(){
         //Check if Firebase user is signed in and act accordingly
         super.onStart();
-
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
         if (currentUser == null){
             logoutUser();
         }
 
     }
-
     private void logoutUser(){
-        Intent logoutIntent = new Intent(MainActivity.this, OnboardingActivity.class);
+        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(logoutIntent);
         finish();
     }
+
+    //** Map Marker Behavior
 
     private void addMarkerToMap(Double lat, Double lon, String key){
         LatLng latLng = new LatLng(lat, lon);
