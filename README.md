@@ -1,8 +1,8 @@
 ![Webblen-IOS](https://github.com/mukai154/Webblen-IOS/blob/master/resources/webblen-cover-img.png)
 
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]()
-[![Platform](https://img.shields.io/badge/platform-IOS-lightgrey.svg)]()
-![Android](https://img.shields.io/badge/Android--green.svg)
+[![Language](https://img.shields.io/badge/Language-Java-lightgrey.svg]()
+![Platform](https://img.shields.io/badge/Platform-Android-green.svg)
 
 # Webblen-Android
 Webblen's Android App -- Be Rewarded for Attending Events Your Interested In
