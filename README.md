@@ -1,6 +1,6 @@
 ![Webblen-IOS](https://github.com/mukai154/Webblen-IOS/blob/master/resources/webblen-cover-img.png)
 
-![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 ![Language](https://img.shields.io/badge/Language-Java-lightgrey.svg)
 ![Platform](https://img.shields.io/badge/Platform-Android-green.svg)
 
