@@ -43,3 +43,8 @@ Join Us in Creating the World's First Incentivized Attendance Software!
 Copyright 2018 Webblen
 
 Licensed under [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0)
+
+## Webblen Team
+If you are working directly with Webblen's Database, use the following credentials for testing:
+Email: user@email.com 
+Password: password
