@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.webblen.events.webblen.MyEventsActivity">
+    tools:context="com.webblen.events.webblen.Activities.MyEventsActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/headerLayout"

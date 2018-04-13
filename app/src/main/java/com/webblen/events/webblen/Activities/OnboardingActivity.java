@@ -1,11 +1,10 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.webblen.events.webblen.R;
+import com.webblen.events.webblen.Adapters.SliderAdapter;
 
 public class OnboardingActivity extends AppCompatActivity {
 

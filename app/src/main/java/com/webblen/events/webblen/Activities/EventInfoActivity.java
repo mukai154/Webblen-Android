@@ -1,7 +1,5 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,6 +23,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.webblen.events.webblen.R;
+import com.webblen.events.webblen.Utilities;
+import com.webblen.events.webblen.Objects.WebblenEvent;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

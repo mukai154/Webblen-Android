@@ -1,4 +1,4 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Adapters;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.webblen.events.webblen.R;
 
 /**
  * Created by Webblen, LLC on 2/20/18.

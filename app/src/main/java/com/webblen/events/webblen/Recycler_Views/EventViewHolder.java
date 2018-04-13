@@ -1,4 +1,4 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Recycler_Views;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.webblen.events.webblen.R;
+import com.webblen.events.webblen.Utilities;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -91,7 +93,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setEventCardInt3(String interest3Image) {
-        eventCardInt3 =  (ImageView) itemView.findViewById(R.id.eventCardInt3);
+        eventCardInt3 =  mView.findViewById(R.id.eventCardInt3);
         eventCardInt3.setImageResource(Utilities.categoryToDrawable(interest3Image.toUpperCase()));
 
     }

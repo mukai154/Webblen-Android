@@ -1,4 +1,4 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -34,6 +34,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
+import com.webblen.events.webblen.R;
 
 import java.util.Arrays;
 

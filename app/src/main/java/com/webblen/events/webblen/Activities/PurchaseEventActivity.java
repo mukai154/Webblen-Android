@@ -1,8 +1,7 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +22,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.webblen.events.webblen.R;
+import com.webblen.events.webblen.Utilities;
+import com.webblen.events.webblen.Objects.WebblenEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
 public class PurchaseEventActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler{

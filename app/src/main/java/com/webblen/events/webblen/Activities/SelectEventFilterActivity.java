@@ -1,4 +1,4 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import com.webblen.events.webblen.R;
 
 public class SelectEventFilterActivity extends AppCompatActivity {
 

@@ -23,12 +23,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -52,43 +52,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateEventActivity"
+            android:name=".Activities.CreateEventActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SelectDateTimeActivity"
+            android:name=".Activities.SelectDateTimeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MainThemeNoAction" />
         <activity
-            android:name=".SelectLocationActivity"
+            android:name=".Activities.SelectLocationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SelectEventFilterActivity"
+            android:name=".Activities.SelectEventFilterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SelectEventCategoriesActivity"
+            android:name=".Activities.SelectEventCategoriesActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".EventPricingActivity"
+            android:name=".Activities.EventPricingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PurchaseEventActivity"
+            android:name=".Activities.PurchaseEventActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MyEventsActivity"
+            android:name=".Activities.MyEventsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ContactUsActivity"
+            android:name=".Activities.ContactUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".InterestsActivity"
+            android:name=".Activities.InterestsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AccountSettingsActivity"
+            android:name=".Activities.AccountSettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".OnboardingActivity">
+        <activity android:name=".Activities.OnboardingActivity">
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
 
@@ -96,15 +96,15 @@
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
-        <activity android:name=".WalletActivity" />
-        <activity android:name=".SetupActivity" />
-        <activity android:name=".TermsConditionsActivity" />
-        <activity android:name=".EventInfoActivity"
+        <activity android:name=".Activities.WalletActivity" />
+        <activity android:name=".Activities.SetupActivity" />
+        <activity android:name=".Activities.TermsConditionsActivity" />
+        <activity android:name=".Activities.EventInfoActivity"
                   android:theme="@style/ShowEventTheme"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".EventTableActivity"></activity>
+        <activity android:name=".Activities.EventTableActivity"></activity>
     </application>
 
 </manifest>

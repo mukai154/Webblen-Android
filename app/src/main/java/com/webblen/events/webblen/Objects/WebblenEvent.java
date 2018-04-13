@@ -1,4 +1,4 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;

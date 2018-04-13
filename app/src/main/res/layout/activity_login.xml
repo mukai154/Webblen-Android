@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pastel_orange_gradient"
-    tools:context="com.webblen.events.webblen.LoginActivity">
+    tools:context="com.webblen.events.webblen.Activities.LoginActivity">
 
     <EditText
         android:id="@+id/registerPassword"

@@ -1,19 +1,12 @@
-package com.webblen.events.webblen;
+package com.webblen.events.webblen.Activities;
 
-import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.webblen.events.webblen.Adapter.ListItemAdapter;
+import com.webblen.events.webblen.Adapters.ListItemAdapter;
+import com.webblen.events.webblen.R;
+import com.webblen.events.webblen.Objects.WebblenEvent;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -35,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class EventTableActivity extends AppCompatActivity {
 

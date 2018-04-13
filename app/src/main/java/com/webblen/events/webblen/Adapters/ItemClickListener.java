@@ -1,4 +1,4 @@
-package com.webblen.events.webblen.Adapter;
+package com.webblen.events.webblen.Adapters;
 
 import android.view.View;
 
