@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]()
 [![Platform](https://img.shields.io/badge/platform-IOS-lightgrey.svg)]()
-![Android](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
+![Android](https://img.shields.io/badge/Android--green.svg)
 
 # Webblen-Android
 Webblen's Android App -- Be Rewarded for Attending Events Your Interested In
