@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]()
 [![Language](https://img.shields.io/badge/Language-Java-lightgrey.svg]()
-![Platform](https://img.shields.io/badge/Platform-Android-green.svg)
+[![Platform](https://img.shields.io/badge/Platform-Android-green.svg)]()
 
 # Webblen-Android
 Webblen's Android App -- Be Rewarded for Attending Events Your Interested In
