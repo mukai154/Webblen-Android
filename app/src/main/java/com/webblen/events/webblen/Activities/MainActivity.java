@@ -178,10 +178,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user_id = firebaseAuth.getCurrentUser().getUid();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-
         //UI
         navBarBtm = (ConstraintLayout) findViewById(R.id.navBottom);
         mapProgressBar = (ProgressBar) findViewById(R.id.mapProgress);
+
         //Tabs
         todayBtn = (ImageButton) findViewById(R.id.todayBtn);
         tomorrowBtn = (ImageButton) findViewById(R.id.tomorrowBtn);
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         currentLocationMarker = mMap.addMarker(markerOptions);
 
         if (client != null){
-            LocationServices.FusedLocationApi.removeLocationUpdates(client, this);
+            LocationServices.getFusedLocationProviderClient(this);
         }
 
     }
@@ -442,7 +442,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         } else {
 
                             mainImageURI = Uri.parse(profile_pic);
-                            usernameMainText.setText("@" + username);
+                            String usernameVal = "@" + username;
+                            usernameMainText.setText(usernameVal);
                             Glide.with(MainActivity.this).load(profile_pic).into(userMainPic);
 
                             userMainPic.setVisibility(View.VISIBLE);
@@ -479,14 +480,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         setTabListeners();
                         navBarBtm.setVisibility(View.VISIBLE);
                         mapProgressBar.setVisibility(View.INVISIBLE);
-
                     }
 
                 } else {
-
                     String error = task.getException().getMessage();
-                    Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
-
+                    if (error != null) {
+                        Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
@@ -651,7 +651,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestToday = event;
@@ -695,7 +694,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestTomorrow = event;
@@ -739,7 +737,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestThisWeek = event;
@@ -783,7 +780,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE This Month: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestThisMonth = event;
@@ -826,7 +822,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestLater = event;
