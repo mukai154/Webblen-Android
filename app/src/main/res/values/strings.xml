@@ -26,6 +26,7 @@
     <string name="webDollarDesc">Tokens worth about $1.00 of WBLN, currently collecting 0% APR.</string>
     <string name="savingsDesc">Balance subject to 3 day withdraw waiting period, Web Dollars currently collecting 0% APR.</string>
     <string name="accountValDesc">The value is based on an average value of WBLN in US dollars.</string>
+    <string name="walletShortHand">Account Value: $0.00</string>
     <string name="filler_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus quam velit, ut vehicula felis accumsan nec. Integer tristique euismod odio. Integer elit nisl, pellentesque ultricies mauris et, consequat ornare erat. Curabitur vulputate elementum cursus. Nulla in rutrum nibh</string>
 
     <!-- TODO: Remove or change this placeholder text -->

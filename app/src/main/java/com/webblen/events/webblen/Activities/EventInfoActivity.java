@@ -121,12 +121,12 @@ public class EventInfoActivity extends AppCompatActivity {
     }
 
     private void getEventAuthorFirestoreData(final String author){
-        firebaseFirestore.collection("usernames").document(author).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("usernames").document(author.toLowerCase()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     String author_uid = task.getResult().getString("uid");
-                    Log.d("EVENT AUTHOR UID", author);
+                    Log.d("EVENT AUTHOR UID", author_uid);
                     firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {

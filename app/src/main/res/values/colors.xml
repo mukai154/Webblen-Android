@@ -3,16 +3,27 @@
     <color name="colorPrimary">#ffc107</color>
     <color name="colorPrimaryDark">#ff9100</color>
     <color name="colorAccent">#ff5722</color>
+    <color name="colorSizzleRed">#f53b57</color>
+    <color name="colorGlamourPink">#ff7675</color>
+    <color name="interestSelected">#FFC107</color>
+    <color name="colorOrange">#FFC107</color>
+    <color name="colorPastelOrange">#fdcb6e</color>
+    <color name="colorPeach">#ffeaa7</color>
+    <color name="colorBlackPearl">#1e272e</color>
     <color name="colorDarkGray">#424242</color>
+    <color name="colorTextColor">#5d5d5d</color>
     <color name="colorLightGray">#d7d7d7</color>
     <color name="accent_material_light_1">#e0e0e0</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorFBBlue">#3B5998</color>
-    <color name="colorTwitterBlue">#00ACED</color>
     <color name="offWhite">#eceeed</color>
     <color name="offWhiteBack">#e8e9e8</color>
-    <color name="interestSelected">#FFC107</color>
-    <color name="colorPeach">#ffcc80</color>
-    <color name="colorTextColor">#5d5d5d</color>
-
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorElusiveBlue">#d2dae2</color>
+    <color name="colorMidnightBlue">#2c3e50</color>
+    <color name="colorFBBlue">#3B5998</color>
+    <color name="colorSkyBlue">#0fbcf9</color>
+    <color name="colorTwitterBlue">#00ACED</color>
+    <color name="colorRobinEggBlue">#00cec9</color>
+    <color name="colorMintGreen">#0be881</color>
+    <color name="colorLightGreenishBlue">#55efc4</color>
+    <color name="colorPurple">#6c5ce7</color>
 </resources>
