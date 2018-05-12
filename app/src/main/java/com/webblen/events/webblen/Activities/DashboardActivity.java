@@ -86,11 +86,52 @@ public class DashboardActivity extends AppCompatActivity {
         walletFrame = (FrameLayout) findViewById(R.id.walletDashboardBtn);
         logoutBtn = (Button) findViewById(R.id.logoutDashboardBtn);
 
+        listEventsFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent listEventIntent = new Intent(DashboardActivity.this, EventTableActivity.class);
+                startActivity(listEventIntent);
+            }
+        });
+
+        mapFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(DashboardActivity.this, MainActivity.class);
+                startActivity(mapIntent);
+            }
+        });
+
+
+        myInterestsFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent interestIntent = new Intent(DashboardActivity.this, InterestsActivity.class);
+                startActivity(interestIntent);
+            }
+        });
+
         createEventFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent createEventIntent = new Intent(DashboardActivity.this, CreateEventActivity.class);
                 startActivity(createEventIntent);
+            }
+        });
+
+        myEventsFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myEventsIntent = new Intent(DashboardActivity.this, MyEventsActivity.class);
+                startActivity(myEventsIntent);
+            }
+        });
+
+        walletFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent walletIntent = new Intent(DashboardActivity.this, WalletActivity.class);
+                startActivity(walletIntent);
             }
         });
 
