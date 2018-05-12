@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/offWhite"
     tools:context=".Activities.DashboardActivity">
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/offWhiteBack"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,7 +25,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:background="@color/colorBlackPearl"
+                android:background="@color/colorDarkGray"
                 android:elevation="10dp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="19dp">
@@ -73,9 +73,9 @@
                     android:id="@+id/accountValueDashboardTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/walletShortHand"
-                    android:textColor="@color/colorTextColor"
+                    android:textColor="@color/colorWhite"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                     android:id="@+id/listEventsDashboardBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@color/colorPastelOrange"
+                    android:background="@color/colorMegamanBlue"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/mapDashboardBtn"
@@ -182,7 +182,7 @@
                     android:id="@+id/interestsDashboardBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@color/colorGlamourPink"
+                    android:background="@color/colorNarenjiOrange"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -227,7 +227,7 @@
                     android:id="@+id/createEventDashboardBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@color/colorSizzleRed"
+                    android:background="@color/colorPastelOrange"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/myEventsDashboardBtn"
@@ -236,7 +236,8 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/colorSizzleRed">
 
                         <TextView
                             android:id="@+id/textView35"
@@ -269,7 +270,7 @@
                     android:id="@+id/myEventsDashboardBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@color/colorSkyBlue"
+                    android:background="@color/colorPurple"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/walletDashboardBtn"
@@ -345,8 +346,22 @@
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
             </android.support.constraint.ConstraintLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/logoutDashboardBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/colorPastelOrange"
+        android:text="Logout"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
