@@ -65,6 +65,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/username_placeholder"
                     android:textColor="@color/colorWhite"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/userDashboardPic" />
@@ -77,19 +78,21 @@
                     android:text="@string/walletShortHand"
                     android:textColor="@color/colorWhite"
                     android:textSize="12sp"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/usernameDashboardTextView" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/settingsDashboardBtn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/white_settings_ic"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/white_settings_ic" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
