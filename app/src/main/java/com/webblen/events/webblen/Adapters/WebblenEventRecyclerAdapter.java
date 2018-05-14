@@ -168,21 +168,6 @@ public class WebblenEventRecyclerAdapter extends RecyclerView.Adapter<WebblenEve
             eventCardTitle.setText(eventTitle);
         }
 
-        public void setEventCardDay(String eventDay) {
-            eventCardDay = mView.findViewById(R.id.eventCardDay);
-            eventCardDay.setText(eventDay);
-        }
-
-        public void setEventCardMonth(String eventMonth) {
-            eventCardMonth = itemView.findViewById(R.id.eventCardMnth);
-            eventCardMonth.setText(eventMonth);
-        }
-
-        public void setEventCardYear(String eventYear) {
-            eventCardYear = mView.findViewById(R.id.eventCardYear);
-            eventCardYear.setText(eventYear);
-        }
-
         public void setEventCardDescription(String descriptionText) {
             eventCardDescription = mView.findViewById(R.id.eventCardDescription);
             eventCardDescription.setText(descriptionText);

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context="com.webblen.events.webblen.Activities.InterestsActivity">
 
 
@@ -15,10 +16,11 @@
 
         <ImageButton
             android:id="@+id/amusementBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:background="@android:color/transparent"
+            android:padding="2dp"
             android:scaleType="fitCenter"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
@@ -41,11 +43,12 @@
 
         <ImageButton
             android:id="@+id/communityBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
             app:layout_constraintTop_toBottomOf="@+id/amusementText"
@@ -66,11 +69,12 @@
 
         <ImageButton
             android:id="@+id/educationBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
             app:layout_constraintTop_toBottomOf="@+id/communityText"
@@ -91,10 +95,11 @@
 
         <ImageButton
             android:id="@+id/foodDrinkBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
+            android:padding="2dp"
             android:scaleType="fitCenter"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
@@ -116,10 +121,11 @@
 
         <ImageButton
             android:id="@+id/musicBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
+            android:padding="2dp"
             android:scaleType="fitCenter"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
@@ -141,11 +147,12 @@
 
         <ImageButton
             android:id="@+id/partyDanceBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
             app:layout_constraintTop_toBottomOf="@+id/musicText"
@@ -166,11 +173,12 @@
 
         <ImageButton
             android:id="@+id/techBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/artBtn"
             app:layout_constraintTop_toBottomOf="@+id/partyDanceText"
@@ -193,11 +201,12 @@
 
         <ImageButton
             android:id="@+id/artBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -219,11 +228,12 @@
 
         <ImageButton
             android:id="@+id/competitionBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/artText"
@@ -247,11 +257,12 @@
 
         <ImageButton
             android:id="@+id/entertainmentBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/competitionText"
@@ -273,11 +284,12 @@
 
         <ImageButton
             android:id="@+id/gamingBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/entertainmentText"
@@ -301,11 +313,12 @@
 
         <ImageButton
             android:id="@+id/networkingBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gamingText"
@@ -329,11 +342,12 @@
 
         <ImageButton
             android:id="@+id/shoppingBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/networkingText"
@@ -357,11 +371,12 @@
 
         <ImageButton
             android:id="@+id/theatreBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoppingText"
@@ -388,11 +403,12 @@
 
         <ImageButton
             android:id="@+id/collegeBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -416,11 +432,12 @@
 
         <ImageButton
             android:id="@+id/cultureBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/collegeText"
@@ -444,11 +461,12 @@
 
         <ImageButton
             android:id="@+id/familyBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cultureText"
@@ -472,11 +490,12 @@
 
         <ImageButton
             android:id="@+id/healthFitnessBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/familyText"
@@ -500,11 +519,12 @@
 
         <ImageButton
             android:id="@+id/outdoorsBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/healthFitnessText"
@@ -528,11 +548,12 @@
 
         <ImageButton
             android:id="@+id/sportsBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/outdoorsText"
@@ -556,11 +577,12 @@
 
         <ImageButton
             android:id="@+id/wineBrewBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:padding="2dp"
             app:layout_constraintLeft_toRightOf="@id/artBtn"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sportsText"
@@ -589,17 +611,18 @@
             style="@style/Widget.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/btn_webbln_orng"
+            android:background="@color/colorPastelOrange"
             android:text="Update Interests"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/techBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/wineBrewText" />
 
 
     </android.support.constraint.ConstraintLayout>

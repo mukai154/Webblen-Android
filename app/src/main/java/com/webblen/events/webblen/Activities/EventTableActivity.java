@@ -1,5 +1,7 @@
 package com.webblen.events.webblen.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,17 +12,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.webblen.events.webblen.Adapters.ListItemAdapter;
+import com.webblen.events.webblen.Adapters.WebblenEventAdapter;
 import com.webblen.events.webblen.R;
 import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Utilities;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,7 +45,7 @@ public class EventTableActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     //--
     private String user_id;
-    private Map<String, Object> userData;
+    private ArrayList<String> userData;
     private List<String> userInterests = new ArrayList<>();
     private List<WebblenEvent> currentEventList = new ArrayList<>();
     private List<WebblenEvent> todayEventList = new ArrayList<>();
@@ -53,8 +60,7 @@ public class EventTableActivity extends AppCompatActivity {
 
     //Recycler
     RecyclerView eventRecyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    ListItemAdapter adapter;
+    WebblenEventAdapter eventAdapter;
 
 
     //Tabs
@@ -95,11 +101,13 @@ public class EventTableActivity extends AppCompatActivity {
         laterTableBtn = (TextView) findViewById(R.id.laterTableBtn);
         eventRecyclerView = (RecyclerView) findViewById(R.id.eventRecyclerView);
         eventRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        eventRecyclerView.setLayoutManager(layoutManager);
-        adapter = new ListItemAdapter(currentEventList);
-        eventRecyclerView.setAdapter(adapter);
+        eventRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        WebblenEvent testEvent = new WebblenEvent();
+        currentEventList.add(testEvent);
+
+        eventAdapter = new WebblenEventAdapter(this, currentEventList);
+        eventRecyclerView.setAdapter(eventAdapter);
 
         loadFirestoreData();
 
@@ -125,7 +133,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = todayEventList;
-                adapter.notifyDataSetChanged();
+                eventAdapter.webblenEventList = currentEventList;
+                eventAdapter.notifyDataSetChanged();
 
             }
         });
@@ -151,7 +160,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = tomorrowEventList;
-                adapter.notifyDataSetChanged();
+                eventAdapter.webblenEventList = currentEventList;
+                eventAdapter.notifyDataSetChanged();
             }
         });
 
@@ -176,7 +186,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = thisWeekEventList;
-                adapter.notifyDataSetChanged();
+                eventAdapter.webblenEventList = currentEventList;
+                eventAdapter.notifyDataSetChanged();
             }
         });
 
@@ -201,7 +212,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = thisMonthEventList;
-                adapter.notifyDataSetChanged();
+                eventAdapter.webblenEventList = currentEventList;
+                eventAdapter.notifyDataSetChanged();
             }
         });
 
@@ -226,7 +238,8 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 currentEventList = laterEventList;
-                adapter.notifyDataSetChanged();
+                eventAdapter.webblenEventList = currentEventList;
+                eventAdapter.notifyDataSetChanged();
             }
         });
 
@@ -243,121 +256,95 @@ public class EventTableActivity extends AppCompatActivity {
         return daysdiff;
     }
 
+    //Load User Data
     private void loadFirestoreData() {
-        //Get User Interests && Events
+
+        Log.d("Firestore: ", "Loading Events");
         firebaseFirestore.collection("users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-              if (task.isSuccessful()){
-                  if (task.getResult().exists()){
-                      userData = (Map<String, Object>) task.getResult().getData().get("interests");
-                      //loop a Map
-                      for (Map.Entry<String, Object> entry : userData.entrySet()) {
-                          boolean hasInterest = (Boolean) entry.getValue();
-                          if (hasInterest) {
-                              userInterests.add(entry.getKey().toLowerCase());
-                          }
-                      }
-                          firebaseFirestore.collection("events").whereEqualTo("paid", true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                              @Override
-                              public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                  if (task.isSuccessful()) {
-                                      for (DocumentSnapshot document : task.getResult()) {
-                                          //Check if event contains interest
-                                          boolean containsInterest = false;
-                                          //Log.d("FIRESTORE EVENT: ", document.getId() + " => " + document.getData());
-                                          ArrayList<String> categories = (ArrayList<String>) document.getData().get("categories");
-                                          for (String tag : categories){
-                                              String eTag = tag.toLowerCase();
-                                              if (userInterests.contains(eTag)){
-                                                  containsInterest = true;
-                                              }
-                                          }
 
-                                          if (containsInterest) {
+                if(task.isSuccessful()){
 
-                                              String address = (String) document.getData().get("address");
-                                              String author = (String) document.getData().get("date");
-                                              String[] catArray = new String[categories.size()];
-                                              catArray = categories.toArray(catArray);
-                                              String date = (String) document.getData().get("date");
-                                              String description = (String) document.getData().get("description");
-                                              int distanceFromUser = 0;
-                                              boolean event18 = (Boolean) document.getData().get("event18");
-                                              boolean event21 = (Boolean) document.getData().get("event21");
-                                              String key = (String) document.getData().get("eventKey");
-                                              Double lat = (Double) document.getData().get("lat");
-                                              Double lon = (Double) document.getData().get("lon");
-                                              boolean notificationOnly = (Boolean) document.getData().get("notificationOnly");
-                                              boolean paid = (Boolean) document.getData().get("paid");
-                                              String pathToImage = (String) document.getData().get("pathToImage");
-                                              Double radius = (Double) document.getData().get("radius");
-                                              int radiusInt = radius.intValue();
-                                              String time = (String) document.getData().get("time");
-                                              String title = (String) document.getData().get("title");
-                                              boolean verified = (Boolean) document.getData().get("verified");
-                                              Long views = (Long) document.getData().get("views");
-                                              int viewsInt = views.intValue();
+                    if(task.getResult().exists()){
 
-                                              WebblenEvent event = new WebblenEvent(address, author, categories,
-                                                      date, description, distanceFromUser,
-                                                      event18, event21, key,
-                                                      lat, lon, notificationOnly,
-                                                      pathToImage, radiusInt, time,
-                                                      title, viewsInt);
+                        String username = task.getResult().getString("username");
+                        String profile_pic = task.getResult().getString("profile_pic");
 
+                        //If username or pic is null...
+                        if (username == null || profile_pic == null){
+                            Intent setupIntent = new Intent(EventTableActivity.this, SetupActivity.class);
+                            startActivity(setupIntent);
+                            finish();
+                        }
 
-                                              try {
-                                                  eventDate = sourceFormat.parse(date);
-                                                  if (eventDate.compareTo(currentDate) < 0) {
-                                                      firebaseFirestore.collection("events").document(key).delete();
-                                                      Log.d("FIRESTORE EVENT: ", "DELETED");
-                                                  } else if (eventDate.compareTo(currentDate) == 0) {
-                                                      if (!todayEventList.contains(event)) {
-                                                          todayEventList.add(event);
-                                                          Log.d("TODAY EVENTS: ", todayEventList.toString());
-                                                      }
-                                                  } else if (getDifferenceDays(currentDate, eventDate) == 1) {
-                                                      if (!tomorrowEventList.contains(event)) {
-                                                          tomorrowEventList.add(event);
-                                                          Log.d("TOMORROW: ", tomorrowEventList.toString());
-                                                      }
-                                                  } else if (getDifferenceDays(currentDate, eventDate) > 1 && getDifferenceDays(currentDate, eventDate) <= 7) {
-                                                      if (!thisWeekEventList.contains(event)) {
-                                                          thisWeekEventList.add(event);
-                                                          Log.d("THIS WEEK: ", thisWeekEventList.toString());
-                                                      }
-                                                  } else if (getDifferenceDays(currentDate, eventDate) > 7 && getDifferenceDays(currentDate, eventDate) <= 30) {
-                                                      if (!thisMonthEventList.contains(event)) {
-                                                          thisMonthEventList.add(event);
-                                                          Log.d("THIS MONTH: ", thisMonthEventList.toString());
-                                                      }
-                                                  } else {
-                                                      if (!laterEventList.contains(event)) {
-                                                          laterEventList.add(event);
-                                                          Log.d("LATER: ", laterEventList.toString());
-                                                      }
-                                                  }
-                                              } catch (ParseException e) {
-                                                  e.printStackTrace();
-                                              }
-                                          }
-                                      }
+                        userData = (ArrayList<String>) task.getResult().getData().get("interests");
+                        Log.d("USER DATA: ", userData.toString());
 
-                                      // TO DO: FIND AUTH IMG
-                                      currentEventList = todayEventList;
-                                      adapter.notifyDataSetChanged();
+                        Log.d("USER DATA: ",userInterests.toString());
+                        firebaseFirestore.collection("events").whereEqualTo("paid", true).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 
-                                  } else {
-                                      Toast.makeText(EventTableActivity.this, "Load Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                  }
-                              }
-                          });
-                  }
-              } else {
-                  Toast.makeText(EventTableActivity.this, "Load Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-              }
+                                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        WebblenEvent webblenEvent = doc.getDocument().toObject(WebblenEvent.class);
+                                        for (String interest : userData) {
+                                            ArrayList<String> eventCategories = webblenEvent.getCategories();
+                                            if (eventCategories.contains(interest)){
+                                                Log.d("ADDING EVENT", "performOrganzieByDate!");
+                                                organizeByDate(webblenEvent);
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        });
+                        Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
+                    }
+
+                } else {
+                    String error = task.getException().getMessage();
+                    if (error != null) {
+                        Toast.makeText(EventTableActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+                    }
+                }
+
             }
         });
+    }
+
+    //Organize Event Days & Distances
+    private void organizeByDate(WebblenEvent event){
+        String date = event.getDate();
+        try {
+            eventDate = sourceFormat.parse(date);
+            if (eventDate.compareTo(currentDate) < 0) {
+                firebaseFirestore.collection("events").document(event.getEventKey()).delete();
+            } else if (eventDate.compareTo(currentDate) == 0) {
+                if (!todayEventList.contains(event)) {
+                    todayEventList.add(event);
+                }
+            } else if (Utilities.getDifferenceDays(currentDate, eventDate) == 1) {
+                if (!tomorrowEventList.contains(event)) {
+                    tomorrowEventList.add(event);
+                }
+            } else if (Utilities.getDifferenceDays(currentDate, eventDate) > 1 && Utilities.getDifferenceDays(currentDate, eventDate) <= 7) {
+                if (!thisWeekEventList.contains(event)) {
+                    thisWeekEventList.add(event);
+                }
+            } else if (Utilities.getDifferenceDays(currentDate, eventDate) > 7 && Utilities.getDifferenceDays(currentDate, eventDate) <= 30) {
+                if (!thisMonthEventList.contains(event)) {
+                    thisMonthEventList.add(event);
+                }
+            } else {
+                if (!laterEventList.contains(event)) {
+                    laterEventList.add(event);
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

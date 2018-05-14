@@ -1,5 +1,7 @@
 package com.webblen.events.webblen.Objects;
 
+import com.webblen.events.webblen.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -29,7 +31,25 @@ public class WebblenEvent implements Serializable{
 
 
     public WebblenEvent(){
-
+        this.address = "address";
+        this.author = "author";
+        ArrayList<String> cats = new ArrayList<String>();
+        cats.add("AMUSEMENT");
+        this.categories = cats;
+        this.date = "03/31/2019";
+        this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus quam velit, ut vehicula felis accumsan nec. Integer tristique euismod odio. Integer elit nisl, pellentesque ultricies mauris et, consequat ornare erat. Curabitur vulputate elementum cursus. Nulla in rutrum nibh";
+        this.distanceFromUser = 1000;
+        this.event18 = false;
+        this.event21 = false;
+        this.eventKey = "eventKeyeyeyeyeyeye";
+        this.lat = 45.2;
+        this.lon = 23.5;
+        this.notificationOnly = false;
+        this.pathToImage = "http://i0.kym-cdn.com/photos/images/original/000/993/047/148.jpg";
+        this.radius = 600;
+        this.time = "12:00pm";
+        this.title = "TITLE";
+        this.views = 10;
     }
 
     public WebblenEvent(String address,

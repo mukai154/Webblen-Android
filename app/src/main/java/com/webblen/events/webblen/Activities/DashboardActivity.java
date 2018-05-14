@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,12 +40,14 @@ public class DashboardActivity extends AppCompatActivity {
     private CircleImageView userWalletPic;
     private Uri mainImageURI = null;
     private TextView usernameWalletText;
+    private TextView accountValText;
     private FrameLayout listEventsFrame;
     private FrameLayout mapFrame;
     private FrameLayout myInterestsFrame;
     private FrameLayout createEventFrame;
     private FrameLayout myEventsFrame;
     private FrameLayout walletFrame;
+    private ImageButton settingsDashboardBtn;
     private Button logoutBtn;
 
 
@@ -77,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
         //Other UI
         userWalletPic = (CircleImageView) findViewById(R.id.userDashboardPic);
         usernameWalletText = (TextView) findViewById(R.id.usernameDashboardTextView);
+        accountValText = (TextView) findViewById(R.id.accountValueDashboardTextView);
         walletProgress = (ProgressBar) findViewById(R.id.userDashboardPicProgress);
         listEventsFrame = (FrameLayout) findViewById(R.id.listEventsDashboardBtn);
         mapFrame = (FrameLayout) findViewById(R.id.mapDashboardBtn);
@@ -84,11 +88,13 @@ public class DashboardActivity extends AppCompatActivity {
         createEventFrame = (FrameLayout) findViewById(R.id.createEventDashboardBtn);
         myEventsFrame = (FrameLayout) findViewById(R.id.myEventsDashboardBtn);
         walletFrame = (FrameLayout) findViewById(R.id.walletDashboardBtn);
+        settingsDashboardBtn = (ImageButton) findViewById(R.id.settingsDashboardBtn);
         logoutBtn = (Button) findViewById(R.id.logoutDashboardBtn);
 
         listEventsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
                 Intent listEventIntent = new Intent(DashboardActivity.this, EventTableActivity.class);
                 startActivity(listEventIntent);
             }
@@ -122,8 +128,9 @@ public class DashboardActivity extends AppCompatActivity {
         myEventsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myEventsIntent = new Intent(DashboardActivity.this, MyEventsActivity.class);
-                startActivity(myEventsIntent);
+                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
+//                Intent myEventsIntent = new Intent(DashboardActivity.this, MyEventsActivity.class);
+//                startActivity(myEventsIntent);
             }
         });
 
@@ -132,6 +139,14 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent walletIntent = new Intent(DashboardActivity.this, WalletActivity.class);
                 startActivity(walletIntent);
+            }
+        });
+
+        settingsDashboardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(DashboardActivity.this, AccountSettingsActivity.class);
+                startActivity(settingsIntent);
             }
         });
 
@@ -173,6 +188,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             userWalletPic.setVisibility(View.VISIBLE);
                             usernameWalletText.setVisibility(View.VISIBLE);
+                            accountValText.setVisibility(View.VISIBLE);
                             walletProgress.setVisibility(View.INVISIBLE);
                         }
                     }
