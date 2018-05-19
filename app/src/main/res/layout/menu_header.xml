@@ -5,7 +5,8 @@
     android:id="@+id/menuHeader"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorDarkGray"
+    android:elevation="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/userMainPic"

@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -76,6 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user_id = firebaseAuth.getCurrentUser().getUid();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
 
         //Other UI
         userWalletPic = (CircleImageView) findViewById(R.id.userDashboardPic);
@@ -175,14 +178,15 @@ public class DashboardActivity extends AppCompatActivity {
                         String username = task.getResult().getString("username");
                         String profile_pic = task.getResult().getString("profile_pic");
 
-                        //If username or pic is null...
-                        if (username == null || profile_pic == null){
+                        //Set profile name & image
+                        if (username == null || profile_pic == null || profile_pic.contentEquals("")){
                             Intent setupIntent = new Intent(DashboardActivity.this, SetupActivity.class);
                             startActivity(setupIntent);
                             finish();
                         } else {
                             mainImageURI = Uri.parse(profile_pic);
-                            usernameWalletText.setText("@" + username);
+                            String usernameText = "@" + username;
+                            usernameWalletText.setText(usernameText);
 
                             Glide.with(DashboardActivity.this).load(profile_pic).into(userWalletPic);
 

@@ -44,14 +44,10 @@ public class EventInfoActivity extends AppCompatActivity {
     private CircleImageView eventAuthImg;
     private TextView eventTitle;
     private TextView eventDesc;
-    private TextView eventMonth;
-    private TextView eventDayofMonth;
-    private TextView eventYear;
     private TextView eventAddress;
     private TextView eventTime;
     private TextView eventViews;
     private int views;
-    private ProgressBar eventInfoImgProgress;
     private ProgressBar eventAuthImgProgress;
 
     //Data
@@ -78,19 +74,15 @@ public class EventInfoActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         //Other UI
-        eventOptions = (ImageButton) findViewById(R.id.moreOptionsBtn);
+        //eventOptions = (ImageButton) findViewById(R.id.moreOptionsBtn);
         eventPhoto = (ImageView) findViewById(R.id.eventInfoImg);
         eventAuthName = (TextView) findViewById(R.id.eventInfoUsername);
         eventAuthImg = (CircleImageView) findViewById(R.id.eventInfoUserImg);
         eventTitle = (TextView) findViewById(R.id.eventInfoTitle);
         eventDesc = (TextView) findViewById(R.id.eventInfoDescription);
-        eventMonth = (TextView) findViewById(R.id.eventInfoMonth);
-        eventDayofMonth = (TextView) findViewById(R.id.eventInfoDay);
-        eventYear = (TextView) findViewById(R.id.eventInfoYear);
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventTime = (TextView) findViewById(R.id.eventTime);
         eventViews = (TextView) findViewById(R.id.eventViewsText);
-        eventInfoImgProgress = (ProgressBar) findViewById(R.id.infoImgProgress);
         eventAuthImgProgress = (ProgressBar) findViewById(R.id.infoAuthImgProgress);
 
         //Set UI
@@ -126,37 +118,40 @@ public class EventInfoActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     String author_uid = task.getResult().getString("uid");
-                    Log.d("EVENT AUTHOR UID", author_uid);
-                    firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (author_uid == null){
+                        Toast.makeText(EventInfoActivity.this, "There was an issue loading this event", Toast.LENGTH_LONG).show();
+                    } else {
+                        firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                            if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
 
-                                if(task.getResult().exists()){
+                                    if (task.getResult().exists()) {
 
-                                    String username = task.getResult().getString("username");
-                                    String profile_pic = task.getResult().getString("profile_pic");
+                                        String username = task.getResult().getString("username");
+                                        String profile_pic = task.getResult().getString("profile_pic");
 
-                                    //pic is null...
-                                    if (profile_pic == null){
-                                        ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) eventAuthImg.getLayoutParams();
-                                        params.width = 1;
-                                        eventAuthImg.setLayoutParams(params);
-                                        eventAuthImg.setVisibility(View.INVISIBLE);
+                                        //pic is null...
+                                        if (profile_pic == null || profile_pic.contentEquals("")) {
+                                            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) eventAuthImg.getLayoutParams();
+                                            params.width = 1;
+                                            eventAuthImg.setLayoutParams(params);
+                                            eventAuthImg.setVisibility(View.INVISIBLE);
 
-                                    } else {
+                                        } else {
 
-                                        setAuthImg(profile_pic);
+                                            setAuthImg(profile_pic);
 
+                                        }
                                     }
+                                } else {
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
                                 }
-                            } else {
-                                String error = task.getException().getMessage();
-                                Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
                             }
-                        }
-                    });
+                        });
+                    }
                 } else {
                     String error = task.getException().getMessage();
                     Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
@@ -171,10 +166,8 @@ public class EventInfoActivity extends AppCompatActivity {
             params.height = 1;
             eventPhoto.setLayoutParams(params);
             eventPhoto.setVisibility(View.INVISIBLE);
-            eventInfoImgProgress.setVisibility(View.INVISIBLE);
         } else {
             Glide.with(EventInfoActivity.this).load(pathToImage).into(eventPhoto);
-            eventInfoImgProgress.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -197,15 +190,6 @@ public class EventInfoActivity extends AppCompatActivity {
 
         String date = selectedEvent.getDate();
         String[] dateParts = date.split("/");
-
-        eventMonth.setText(Utilities.getMonth(dateParts[0]));
-        eventMonth.setBackgroundResource(0);
-
-        eventDayofMonth.setText(dateParts[1]);
-        eventDayofMonth.setBackgroundResource(0);
-
-        eventYear.setText(dateParts[2]);
-        eventYear.setBackgroundResource(0);
 
         String address = "Address: " + selectedEvent.getAddress();
         address = address.replace(", USA", "");

@@ -359,7 +359,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@color/colorPastelOrange"
+        android:background="@drawable/btn_webbln_orng"
         android:text="Logout"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

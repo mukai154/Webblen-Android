@@ -189,8 +189,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         thisMnthBtn = (ImageButton) findViewById(R.id.thisMonthBtn);
         laterBtn = (ImageButton) findViewById(R.id.laterBtn);
 
-        loadFirestoreData();
-
         //Menu
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -222,21 +220,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         drawerLayout.closeDrawers();
                         startActivity(createEventIntent);
                         break;
-                    case(R.id.myEventsMenuButton):
-//                        Intent myEventsIntent = new Intent(MainActivity.this, MyEventsActivity.class);
-//                        drawerLayout.closeDrawers();
-//                        startActivity(myEventsIntent);
-                        Toast.makeText(MainActivity.this, "Temporarily Unavailable", Toast.LENGTH_SHORT).show();
-                        break;
-                    case(R.id.walletMenuOption):
-                        Intent walletIntent = new Intent(MainActivity.this, WalletActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(walletIntent);
-                        break;
-                    case(R.id.settingsMenuButton):
-                        Intent settingsIntent = new Intent(MainActivity.this, AccountSettingsActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(settingsIntent);
+                    case(R.id.dashboardMenuBtn):
+                        finish();
                         break;
                     case(R.id.contactMenuButton):
 //                        Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
@@ -247,18 +232,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         i.setData(Uri.parse(url));
                         startActivity(i);
                         break;
-                    case(R.id.logoutMenuButton):
-                        drawerLayout.closeDrawers();
-                        firebaseAuth.signOut();
-                        LoginManager.getInstance().logOut();
-                        TwitterCore.getInstance().getSessionManager().clearActiveSession();
-                        logoutUser();
-                        break;
                 }
                 return true;
             }
         });
 
+        //Click Listeners
+        userMainPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWalletActivity();
+            }
+        });
+
+        usernameMainText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWalletActivity();
+            }
+        });
+
+        //Firebase
+        loadFirestoreData();
 
     }
 
@@ -435,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         String profile_pic = task.getResult().getString("profile_pic");
 
                         //If username or pic is null...
-                        if (username == null || profile_pic == null){
+                        if (username == null || profile_pic == null || profile_pic == ""){
                             Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
                             startActivity(setupIntent);
                             finish();
@@ -542,6 +537,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
     }
 
+    //**ACTIVITIES
+
+    //Start Wallet Activity
+    private void startWalletActivity(){
+        Intent walletIntent = new Intent(MainActivity.this, WalletActivity.class);
+        drawerLayout.closeDrawers();
+        startActivity(walletIntent);
+    }
     //Start Activity By Key
     private void startActivityFromKey(String key){
         WebblenEvent eventClicked = findEventByKey(key);
