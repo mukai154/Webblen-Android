@@ -65,6 +65,8 @@ public class WalletActivity extends AppCompatActivity {
         savingsWblnSpinner = (ImageButton) findViewById(R.id.savingsWblnSpinner);
         savingsWbDllrSpinner = (ImageButton) findViewById(R.id.savingsWbDllrSpinner);
 
+
+
         loadFirestoreData();
 
 

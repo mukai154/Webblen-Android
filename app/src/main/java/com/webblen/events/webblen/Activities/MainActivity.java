@@ -178,18 +178,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user_id = firebaseAuth.getCurrentUser().getUid();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-
         //UI
         navBarBtm = (ConstraintLayout) findViewById(R.id.navBottom);
         mapProgressBar = (ProgressBar) findViewById(R.id.mapProgress);
+
         //Tabs
         todayBtn = (ImageButton) findViewById(R.id.todayBtn);
         tomorrowBtn = (ImageButton) findViewById(R.id.tomorrowBtn);
         thisWeekBtn = (ImageButton) findViewById(R.id.thisWeekBtn);
         thisMnthBtn = (ImageButton) findViewById(R.id.thisMonthBtn);
         laterBtn = (ImageButton) findViewById(R.id.laterBtn);
-
-        loadFirestoreData();
 
         //Menu
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -222,21 +220,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         drawerLayout.closeDrawers();
                         startActivity(createEventIntent);
                         break;
-                    case(R.id.myEventsMenuButton):
-//                        Intent myEventsIntent = new Intent(MainActivity.this, MyEventsActivity.class);
-//                        drawerLayout.closeDrawers();
-//                        startActivity(myEventsIntent);
-                        Toast.makeText(MainActivity.this, "Temporarily Unavailable", Toast.LENGTH_SHORT).show();
-                        break;
-                    case(R.id.walletMenuOption):
-                        Intent walletIntent = new Intent(MainActivity.this, WalletActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(walletIntent);
-                        break;
-                    case(R.id.settingsMenuButton):
-                        Intent settingsIntent = new Intent(MainActivity.this, AccountSettingsActivity.class);
-                        drawerLayout.closeDrawers();
-                        startActivity(settingsIntent);
+                    case(R.id.dashboardMenuBtn):
+                        finish();
                         break;
                     case(R.id.contactMenuButton):
 //                        Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
@@ -247,18 +232,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         i.setData(Uri.parse(url));
                         startActivity(i);
                         break;
-                    case(R.id.logoutMenuButton):
-                        drawerLayout.closeDrawers();
-                        firebaseAuth.signOut();
-                        LoginManager.getInstance().logOut();
-                        TwitterCore.getInstance().getSessionManager().clearActiveSession();
-                        logoutUser();
-                        break;
                 }
                 return true;
             }
         });
 
+        //Click Listeners
+        userMainPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWalletActivity();
+            }
+        });
+
+        usernameMainText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWalletActivity();
+            }
+        });
+
+        //Firebase
+        loadFirestoreData();
 
     }
 
@@ -345,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         currentLocationMarker = mMap.addMarker(markerOptions);
 
         if (client != null){
-            LocationServices.FusedLocationApi.removeLocationUpdates(client, this);
+            LocationServices.getFusedLocationProviderClient(this);
         }
 
     }
@@ -435,14 +430,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         String profile_pic = task.getResult().getString("profile_pic");
 
                         //If username or pic is null...
-                        if (username == null || profile_pic == null){
+                        if (username == null || profile_pic == null || profile_pic == ""){
                             Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
                             startActivity(setupIntent);
                             finish();
                         } else {
 
                             mainImageURI = Uri.parse(profile_pic);
-                            usernameMainText.setText("@" + username);
+                            String usernameVal = "@" + username;
+                            usernameMainText.setText(usernameVal);
                             Glide.with(MainActivity.this).load(profile_pic).into(userMainPic);
 
                             userMainPic.setVisibility(View.VISIBLE);
@@ -479,14 +475,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         setTabListeners();
                         navBarBtm.setVisibility(View.VISIBLE);
                         mapProgressBar.setVisibility(View.INVISIBLE);
-
                     }
 
                 } else {
-
                     String error = task.getException().getMessage();
-                    Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
-
+                    if (error != null) {
+                        Toast.makeText(MainActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
@@ -542,6 +537,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
     }
 
+    //**ACTIVITIES
+
+    //Start Wallet Activity
+    private void startWalletActivity(){
+        Intent walletIntent = new Intent(MainActivity.this, WalletActivity.class);
+        drawerLayout.closeDrawers();
+        startActivity(walletIntent);
+    }
     //Start Activity By Key
     private void startActivityFromKey(String key){
         WebblenEvent eventClicked = findEventByKey(key);
@@ -651,7 +654,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestToday = event;
@@ -695,7 +697,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestTomorrow = event;
@@ -739,7 +740,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestThisWeek = event;
@@ -783,7 +783,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE This Month: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestThisMonth = event;
@@ -826,7 +825,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             eventLocation.setLatitude(event.getLat());
                             eventLocation.setLongitude(event.getLon());
                             float comparedDistance = currentLocation.distanceTo(eventLocation);
-                            Log.d("COMPARED DISTANCE Later: ", String.valueOf(comparedDistance));
                             if (comparedDistance < distanceFromEvent){
                                 distanceFromEvent = comparedDistance;
                                 closestLater = event;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pastel_orange_gradient"
+    android:background="@color/colorDarkGray"
     tools:context="com.webblen.events.webblen.Activities.LoginActivity">
 
     <EditText
@@ -17,8 +17,10 @@
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
+        android:textColorHint="@color/colorTextColor"
+        android:backgroundTint="@color/colorWhite"
         android:textColor="@android:color/white"
-        android:textColorHighlight="@color/colorDarkGray"
+        android:textColorHighlight="@color/colorPastelOrange"
         android:textColorLink="@android:color/white"
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,11 +34,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/colorTextColor"
+        android:backgroundTint="@color/colorWhite"
         android:ems="10"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         android:textColor="@android:color/white"
-        android:textColorHighlight="@color/colorDarkGray"
+        android:textColorHighlight="@color/colorPastelOrange"
         android:textColorLink="@android:color/white"
         android:typeface="sans"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -60,7 +64,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/btn_dark_gray"
+        android:background="@drawable/btn_webbln_orng"
         android:text="Login"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,12 +136,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
         android:text="@string/terms_and_conditions_login"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twitterLoginBtn"
-        android:clickable="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/twitterLoginBtn" />
 
     <ProgressBar
         android:id="@+id/loginProgressBar"

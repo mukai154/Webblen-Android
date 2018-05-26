@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userIsLoggedIn(){
-        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent loginIntent = new Intent(LoginActivity.this, DashboardActivity.class);
         startActivity(loginIntent);
         finish();
     }

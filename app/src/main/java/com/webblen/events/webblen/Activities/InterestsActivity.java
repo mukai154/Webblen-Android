@@ -414,15 +414,13 @@ public class InterestsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Intent mainIntent = new Intent(InterestsActivity.this, MainActivity.class);
-                        startActivity(mainIntent);
                         finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(InterestsActivity.this, "There Was an Issue Setting Up Your Account. Please Try Again.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(InterestsActivity.this, "There Was an Issue Setting Up Your Interests. Please Try Again.", Toast.LENGTH_LONG).show();
                     }
                 });
     }

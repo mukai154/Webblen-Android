@@ -3,14 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,81 +26,47 @@
 
             <ImageView
                 android:id="@+id/eventCardImg"
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_width="0dp"
+                android:layout_height="275dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@color/colorLightGray" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/eventCardAuthorImg"
-                android:layout_width="1dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventCardImg"
-                app:srcCompat="@drawable/user_profile" />
+                app:srcCompat="@drawable/circle_webblen_logo" />
 
             <TextView
                 android:id="@+id/eventCardAuthName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="14dp"
                 android:fontFamily="sans-serif"
-                android:text="username"
+                android:text="@string/username_placeholder"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/eventCardAuthorImg"
-                app:layout_constraintTop_toBottomOf="@+id/eventCardImg" />
+                app:layout_constraintTop_toBottomOf="@+id/eventCardTitle" />
 
             <TextView
                 android:id="@+id/eventCardTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
                 android:text="Event Title"
+                android:textColor="@color/colorBlackPearl"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/eventCardAuthorImg"
-                app:layout_constraintTop_toBottomOf="@+id/eventCardAuthName" />
-
-            <TextView
-                android:id="@+id/eventCardMnth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="Mar"
-                android:textAlignment="center"
-                android:textSize="8sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/eventCardAuthName" />
-
-            <TextView
-                android:id="@+id/eventCardDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="31"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/eventCardYear"
-                app:layout_constraintEnd_toEndOf="@+id/eventCardMnth"
-                app:layout_constraintStart_toStartOf="@+id/eventCardMnth"
-                app:layout_constraintTop_toBottomOf="@+id/eventCardMnth" />
-
-            <TextView
-                android:id="@+id/eventCardYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2018"
-                android:textAlignment="center"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/eventCardTitle"
-                app:layout_constraintEnd_toEndOf="@+id/eventCardDay"
-                app:layout_constraintStart_toStartOf="@+id/eventCardDay"
-                app:layout_constraintTop_toBottomOf="@+id/eventCardDay" />
+                app:layout_constraintStart_toEndOf="@+id/eventCardAuthorImg"
+                app:layout_constraintTop_toBottomOf="@+id/eventCardImg" />
 
             <TextView
                 android:id="@+id/eventCardDescription"
@@ -104,9 +75,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/filler_text"
-                android:textSize="12sp"
                 android:maxLines="5"
+                android:text="@string/filler_text"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventCardAuthorImg" />
@@ -115,45 +87,41 @@
                 android:id="@+id/eventCardInt1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eventCardDescription"
-                app:srcCompat="@drawable/amusement" />
+                app:layout_constraintTop_toBottomOf="@+id/eventCardDescription" />
 
             <ImageView
                 android:id="@+id/eventCardInt2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/eventCardInt1"
                 app:layout_constraintTop_toBottomOf="@+id/eventCardDescription"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/art" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/eventCardInt3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/eventCardInt2"
                 app:layout_constraintTop_toBottomOf="@+id/eventCardDescription"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/collegelife" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/eventCardEye"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/eventCardDescription"
                 app:layout_constraintTop_toBottomOf="@+id/eventCardDescription"
@@ -163,7 +131,7 @@
                 android:id="@+id/eventCardViews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="1dp"
                 android:text="103"
                 android:textAlignment="center"
                 android:textColor="@color/colorLightGray"

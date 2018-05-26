@@ -11,12 +11,14 @@
     <string name="twitter_key">9gDtPWHxcnj6CUoyeVQCKGsGl</string>
     <string name="twitter_secret">y57kSG4yUowPNVXNEy5EEbUybTR3Dt72VT4FydWhZ1oKMnspQa</string>
     <string name="google_license">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmJJ1KeGhMu7BHMGFZ8G8zW2KjEsqfROqbKP1zp9RjMtSHUT5OE+Pn8BhdjE7DDteOqLhW+CeBPoH4xwQgfEPT4I+bvSN4aTqxlMTtl6haIYA64Re74nD3BfwkYhjT7SiOuP90UA3TWPzOfuP2gthJk9ZidyhlTnFrKbyQW4rw4J2HFRGSSIU/UbUQEe1mvjBkLv8sdalLyA9TOXZfK/wjr6fJz/N6Bb9iLknnw01l/6bcYOfZU5bJX9TrKVdc4QCGCj2ZVle2UlQiArj0GJvtVy7cQZf2GPfPBVKlPNapFs5SjBxeQGPSN8PXGh4Sg/G9Z/mvHg0hnVRysvbejyd6QIDAQAB</string>
+    <string name="dashboard_menu_option">Dashboard</string>
     <string name="interests_menu_option">Interests</string>
     <string name="create_event_menu_option">Create Event</string>
     <string name="my_events_menu_option">My Events</string>
     <string name="wallet_menu_option">Wallet</string>
     <string name="settings_menu_option">Settings</string>
     <string name="contact_menu_option">Contact Us</string>
+    <string name="what_is_webblen_menu_option">What is Webblen?</string>
     <string name="logout_menu_option">Logout</string>
     <string name="open_menu">Open</string>
     <string name="close_menu">Close</string>
@@ -26,6 +28,7 @@
     <string name="webDollarDesc">Tokens worth about $1.00 of WBLN, currently collecting 0% APR.</string>
     <string name="savingsDesc">Balance subject to 3 day withdraw waiting period, Web Dollars currently collecting 0% APR.</string>
     <string name="accountValDesc">The value is based on an average value of WBLN in US dollars.</string>
+    <string name="walletShortHand">Account Value: $0.00</string>
     <string name="filler_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus quam velit, ut vehicula felis accumsan nec. Integer tristique euismod odio. Integer elit nisl, pellentesque ultricies mauris et, consequat ornare erat. Curabitur vulputate elementum cursus. Nulla in rutrum nibh</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -4,48 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.webblen.events.webblen.Activities.MainActivity">
 
+
+    <item
+        android:id="@+id/dashboardMenuBtn"
+        android:orderInCategory="1"
+        android:icon="@drawable/gray_dashboard_icon"
+        android:title="@string/dashboard_menu_option"
+        app:showAsAction="never" />
     <item
         android:id="@+id/interestsMenuButton"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         android:icon="@drawable/gray_heart_icon"
         android:title="@string/interests_menu_option"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/createMenuButton"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:icon="@drawable/gray_add_event_icon"
         android:title="@string/create_event_menu_option"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/myEventsMenuButton"
-        android:orderInCategory="3"
-        android:icon="@drawable/gray_calendar_icon"
-        android:title="@string/my_events_menu_option"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/walletMenuOption"
-        android:orderInCategory="4"
-        android:icon="@drawable/gray_wallet_icon"
-        android:title="@string/wallet_menu_option"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/settingsMenuButton"
-        android:orderInCategory="5"
-        android:icon="@drawable/gray_settings_icon"
-        android:title="@string/settings_menu_option"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/contactMenuButton"
-        android:orderInCategory="6"
+        android:orderInCategory="4"
         android:icon="@drawable/gray_question_icon"
-        android:title="@string/contact_menu_option"
+        android:title="@string/what_is_webblen_menu_option"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/logoutMenuButton"
-        android:orderInCategory="7"
-        android:icon="@drawable/gray_exit_icon"
-        android:title="@string/logout_menu_option"
-        app:showAsAction="never" />
+
 
 </menu>

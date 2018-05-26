@@ -147,7 +147,7 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     private void loginUser(){
-        Intent loginIntent = new Intent(OnboardingActivity.this, MainActivity.class);
+        Intent loginIntent = new Intent(OnboardingActivity.this, DashboardActivity.class);
         startActivity(loginIntent);
         finish();
     }

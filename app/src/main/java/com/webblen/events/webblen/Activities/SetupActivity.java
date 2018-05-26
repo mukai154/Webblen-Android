@@ -209,7 +209,7 @@ public class SetupActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Intent mainIntent = new Intent(SetupActivity.this, MainActivity.class);
+                                        Intent mainIntent = new Intent(SetupActivity.this, DashboardActivity.class);
                                         startActivity(mainIntent);
                                         finish();
                                     }
