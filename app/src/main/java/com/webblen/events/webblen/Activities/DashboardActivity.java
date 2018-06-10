@@ -97,9 +97,9 @@ public class DashboardActivity extends AppCompatActivity {
         listEventsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
-//                Intent listEventIntent = new Intent(DashboardActivity.this, EventTableActivity.class);
-//                startActivity(listEventIntent);
+//                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
+                Intent listEventIntent = new Intent(DashboardActivity.this, EventTableActivity.class);
+                startActivity(listEventIntent);
             }
         });
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/offWhite"
+    android:background="@drawable/webblen_background"
     tools:context=".Activities.DashboardActivity">
 
     <ScrollView
@@ -24,8 +24,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
-                android:background="@color/colorDarkGray"
+                android:layout_height="185dp"
                 android:elevation="10dp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="19dp">
@@ -35,6 +34,7 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_marginTop="32dp"
+                    android:elevation="10dp"
                     android:src="@drawable/transparent_logo"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@string/username_placeholder"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorPrimaryDark"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="6dp"
                     android:text="@string/walletShortHand"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorTextColor"
                     android:textSize="12sp"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:adjustViewBounds="false"
-                    android:background="@drawable/white_settings_ic"
+                    android:background="@drawable/dark_settings_icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,14 +98,13 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:layout_marginTop="16dp">
+                android:layout_height="100dp">
 
                 <FrameLayout
                     android:id="@+id/listEventsDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorMegamanBlue"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/mapDashboardBtn"
@@ -118,22 +117,22 @@
 
                         <ImageView
                             android:id="@+id/imageView15"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/list_icon" />
+                            app:srcCompat="@drawable/dark_list_icon" />
 
                         <TextView
                             android:id="@+id/textView32"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="List Events"
+                            android:text="Events"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -143,9 +142,9 @@
 
                 <FrameLayout
                     android:id="@+id/mapDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorLightGreenishBlue"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/interestsDashboardBtn"
@@ -163,7 +162,7 @@
                             android:layout_marginTop="4dp"
                             android:text="Map"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -171,21 +170,21 @@
 
                         <ImageView
                             android:id="@+id/imageView16"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/white_pin_ic" />
+                            app:srcCompat="@drawable/dark_pin_icon" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/interestsDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorNarenjiOrange"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -201,9 +200,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="My Interests"
+                            android:text="Interests"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -211,26 +210,26 @@
 
                         <ImageView
                             android:id="@+id/imageView17"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/white_heart_ic" />
+                            app:srcCompat="@drawable/dark_heart_icon" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp">
+                android:layout_height="100dp">
 
                 <FrameLayout
                     android:id="@+id/createEventDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorPastelOrange"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/myEventsDashboardBtn"
@@ -239,8 +238,7 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorSizzleRed">
+                        android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/textView35"
@@ -249,9 +247,9 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="4dp"
-                            android:text="Create New Event"
+                            android:text="New Event"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="10sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -259,21 +257,21 @@
 
                         <ImageView
                             android:id="@+id/imageView20"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/white_plus_ic" />
+                            app:srcCompat="@drawable/dark_add_icon" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/myEventsDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorPurple"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/walletDashboardBtn"
@@ -291,7 +289,7 @@
                             android:layout_marginTop="2dp"
                             android:text="My Events"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -299,21 +297,21 @@
 
                         <ImageView
                             android:id="@+id/imageView19"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/white_event_ic" />
+                            app:srcCompat="@drawable/dark_calendar_icon" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/walletDashboardBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorMintGreen"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
                     android:elevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -331,7 +329,7 @@
                             android:layout_marginTop="2dp"
                             android:text="Wallet"
                             android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorDarkGray"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -339,13 +337,140 @@
 
                         <ImageView
                             android:id="@+id/imageView18"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/white_wallet_ic" />
+                            app:srcCompat="@drawable/dark_wallet_icon" />
+                    </android.support.constraint.ConstraintLayout>
+                </FrameLayout>
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <FrameLayout
+                    android:id="@+id/geoChatDashboardBtn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/groupDashboardBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/chatText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Geo-Chat"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/chatImage" />
+
+                        <ImageView
+                            android:id="@+id/chatImage"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/dark_chat_icon" />
+                    </android.support.constraint.ConstraintLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/groupDashboardBtn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/searchDashboardBtn"
+                    app:layout_constraintStart_toEndOf="@+id/geoChatDashboardBtn"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/groupsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Groups"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/groupImage" />
+
+                        <ImageView
+                            android:id="@+id/groupImage"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/dark_group_icon" />
+                    </android.support.constraint.ConstraintLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/searchDashboardBtn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/user_event_stats_back"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/groupDashboardBtn"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/searchTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Search"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/searchIcon" />
+
+                        <ImageView
+                            android:id="@+id/searchIcon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/dark_search_icon" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
             </android.support.constraint.ConstraintLayout>
@@ -359,7 +484,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/btn_webbln_orng"
+        android:background="@drawable/btn_dark_gray"
         android:text="Logout"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

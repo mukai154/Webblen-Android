@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,7 @@ public class WebblenEventRecyclerAdapter extends RecyclerView.Adapter<WebblenEve
                 if(task.isSuccessful()){
 
                     String uid = task.getResult().getString("uid");
+                    Log.d("UID", uid);
 
                     firebaseFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -93,8 +95,9 @@ public class WebblenEventRecyclerAdapter extends RecyclerView.Adapter<WebblenEve
                                     String profile_pic = task.getResult().getString("profile_pic");
                                     //If username or pic is null...
                                     if (profile_pic == null){
-                                        holder.eventCardAuthorImg.setMaxWidth(1);
+                                        Log.d("PIC:", "No Profile Pic ");
                                     } else {
+                                        Log.d("PIC:", profile_pic);
                                         holder.setEventCardAuthorImg(profile_pic);
                                     }
                                 }
@@ -149,7 +152,7 @@ public class WebblenEventRecyclerAdapter extends RecyclerView.Adapter<WebblenEve
         public void setEventCardImg(String pathToImage) {
             eventCardImg = mView.findViewById(R.id.eventCardImg);
             Uri imageUri = Uri.parse(pathToImage);
-            Glide.with(context).load(pathToImage).into(eventCardImg);
+            Glide.with(context).load(imageUri).into(eventCardImg);
         }
 
         public void setEventCardAuthorImg(String profilePic) {
