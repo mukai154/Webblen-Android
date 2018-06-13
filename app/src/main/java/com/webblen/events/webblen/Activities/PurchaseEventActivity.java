@@ -24,7 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.webblen.events.webblen.R;
 import com.webblen.events.webblen.Utilities;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -188,8 +188,10 @@ public class PurchaseEventActivity extends AppCompatActivity implements BillingP
         eventDocData.put("lon", newEvent.getLon());
         eventDocData.put("notificationOnly", null);
         eventDocData.put("paid", true);
+        eventDocData.put("verified", false);
         eventDocData.put("radius", null);
         eventDocData.put("time", null);
+        eventDocData.put("author_pic", newEvent.getAuthor_Pic());
 
         //Compress and Upload
         purchaseProgressBar.setVisibility(View.VISIBLE);

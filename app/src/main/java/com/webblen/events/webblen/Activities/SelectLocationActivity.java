@@ -2,6 +2,7 @@ package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -75,7 +76,6 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
         notifRadiusText = (EditText) findViewById(R.id.notifRadiusText);
         notifRadiusText.setEnabled(false);
         notifSeekBar = (SeekBar) findViewById(R.id.notifSeekBar);
-        notifSeekBar.setMin(250);
         notifSeekBar.setEnabled(false);
         setLocationBtn = (Button) findViewById(R.id.submitLocation);
 
@@ -114,8 +114,8 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
                     mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)));
                     mMap.addCircle(new CircleOptions().center(new LatLng(latitude, longitude))
                         .radius(radius)
-                        .strokeColor(getColor(R.color.colorPrimary))
-                        .fillColor(getColor(R.color.colorPeach)));
+                        .strokeColor(ContextCompat.getColor(SelectLocationActivity.this, R.color.colorPrimary))
+                        .fillColor(ContextCompat.getColor(SelectLocationActivity.this, R.color.colorPeach)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 10));
                 }
                 return false;
@@ -125,14 +125,17 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
         notifSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(progress < 250) {
+                    seekBar.setProgress(250);
+                }
                 radius = progress;
                 notifRadiusText.setText(String.valueOf(radius));
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)));
                 mMap.addCircle(new CircleOptions().center(new LatLng(latitude, longitude))
                         .radius(radius)
-                        .strokeColor(getColor(R.color.colorPrimary))
-                        .fillColor(getColor(R.color.colorPeach)));
+                        .strokeColor(ContextCompat.getColor(SelectLocationActivity.this, R.color.colorPrimary))
+                        .fillColor(ContextCompat.getColor(SelectLocationActivity.this, R.color.colorPeach)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 10));
             }
 
@@ -152,7 +155,7 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
             public void onClick(View v) {
                 Double lat = latitude;
                 Double lon = longitude;
-                int eventRadius = Integer.getInteger(notifRadiusText.getText().toString());
+                int eventRadius = radius;
                 if (lat == null || lon == null || address == null){
                     Toast.makeText(SelectLocationActivity.this, "Please Set a Location", Toast.LENGTH_LONG).show();
                 } else {
@@ -261,12 +264,10 @@ public class SelectLocationActivity extends AppCompatActivity implements OnMapRe
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
-        locationRequest = new LocationRequest();
-
-        locationRequest.setInterval(1000);
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(1000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(client, locationRequest, this);

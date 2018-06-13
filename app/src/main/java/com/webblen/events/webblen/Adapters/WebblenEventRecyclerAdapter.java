@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.webblen.events.webblen.R;
 import com.webblen.events.webblen.Utilities;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 
 import java.util.List;
 

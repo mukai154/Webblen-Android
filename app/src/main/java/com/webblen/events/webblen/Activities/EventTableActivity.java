@@ -1,7 +1,7 @@
 package com.webblen.events.webblen.Activities;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.webblen.events.webblen.Adapters.WebblenEventAdapter;
 import com.webblen.events.webblen.R;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 import com.webblen.events.webblen.Utilities;
 
 import java.text.DateFormat;
@@ -35,7 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class EventTableActivity extends AppCompatActivity {
 
@@ -53,10 +52,9 @@ public class EventTableActivity extends AppCompatActivity {
     private List<WebblenEvent> thisWeekEventList = new ArrayList<>();
     private List<WebblenEvent> thisMonthEventList = new ArrayList<>();
     private List<WebblenEvent> laterEventList = new ArrayList<>();
-    private DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat sourceFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Date eventDate;
     private Date currentDate = new Date();
-
 
     //Recycler
     RecyclerView eventRecyclerView;
@@ -79,6 +77,10 @@ public class EventTableActivity extends AppCompatActivity {
     private TextView laterTableBtn;
     private boolean eventsLater = false;
 
+    //UI
+    private ImageView noResultsImgView;
+    private TextView noResultsTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,13 +101,11 @@ public class EventTableActivity extends AppCompatActivity {
         thisWeekTableBtn = (TextView) findViewById(R.id.thisWeekTableBtn);
         thisMonthTableBtn = (TextView) findViewById(R.id.thisMonthTableBtn);
         laterTableBtn = (TextView) findViewById(R.id.laterTableBtn);
+        noResultsImgView = (ImageView) findViewById(R.id.noResultsImgView);
+        noResultsTextView = (TextView) findViewById(R.id.noResultsTextView);
         eventRecyclerView = (RecyclerView) findViewById(R.id.eventRecyclerView);
         eventRecyclerView.setHasFixedSize(true);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        WebblenEvent testEvent = new WebblenEvent();
-        currentEventList.add(testEvent);
-
         eventAdapter = new WebblenEventAdapter(this, currentEventList);
         eventRecyclerView.setAdapter(eventAdapter);
 
@@ -115,6 +115,7 @@ public class EventTableActivity extends AppCompatActivity {
         todayTableBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noResultsTextView.setText("No Events Found For Today");
                 eventsToday = true;
                 eventsTomorrow = false;
                 eventsThisWeek = false;
@@ -133,15 +134,15 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = todayEventList;
-                eventAdapter.webblenEventList = currentEventList;
-                eventAdapter.notifyDataSetChanged();
-
+                updateRecyclerViewData();
+                setRecyclerViewVisibility();
             }
         });
 
         tomorrowTableBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noResultsTextView.setText("No Events Found For Tomorrow");
                 eventsToday = false;
                 eventsTomorrow = true;
                 eventsThisWeek = false;
@@ -160,14 +161,15 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = tomorrowEventList;
-                eventAdapter.webblenEventList = currentEventList;
-                eventAdapter.notifyDataSetChanged();
+                updateRecyclerViewData();
+                setRecyclerViewVisibility();
             }
         });
 
         thisWeekTableBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noResultsTextView.setText("No Events Found For This Week");
                 eventsToday = false;
                 eventsTomorrow = false;
                 eventsThisWeek = true;
@@ -186,14 +188,16 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = thisWeekEventList;
-                eventAdapter.webblenEventList = currentEventList;
-                eventAdapter.notifyDataSetChanged();
+                Log.d("THIS WEEK:", thisWeekEventList.toString());
+                updateRecyclerViewData();
+                setRecyclerViewVisibility();
             }
         });
 
         thisMonthTableBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noResultsTextView.setText("No Events Found This Month");
                 eventsToday = false;
                 eventsTomorrow = false;
                 eventsThisWeek = false;
@@ -212,14 +216,15 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorLightGray));
 
                 currentEventList = thisMonthEventList;
-                eventAdapter.webblenEventList = currentEventList;
-                eventAdapter.notifyDataSetChanged();
+                updateRecyclerViewData();
+                setRecyclerViewVisibility();
             }
         });
 
         laterTableBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noResultsTextView.setText("No Events Found Later");
                 eventsToday = false;
                 eventsTomorrow = false;
                 eventsThisWeek = false;
@@ -238,23 +243,12 @@ public class EventTableActivity extends AppCompatActivity {
                 laterTableBtn.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 currentEventList = laterEventList;
-                eventAdapter.webblenEventList = currentEventList;
-                eventAdapter.notifyDataSetChanged();
+                updateRecyclerViewData();
+                setRecyclerViewVisibility();
             }
         });
-
-
-
     }
 
-
-    private int getDifferenceDays(Date d1, Date d2) {
-        int daysdiff = 0;
-        long diff = d2.getTime() - d1.getTime();
-        long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
-        daysdiff = (int) diffDays;
-        return daysdiff;
-    }
 
     //Load User Data
     private void loadFirestoreData() {
@@ -288,20 +282,37 @@ public class EventTableActivity extends AppCompatActivity {
 
                                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                                     if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        String auth_pic = doc.getDocument().getString("author_pic");
                                         WebblenEvent webblenEvent = doc.getDocument().toObject(WebblenEvent.class);
                                         for (String interest : userData) {
                                             ArrayList<String> eventCategories = webblenEvent.getCategories();
                                             if (eventCategories.contains(interest)){
-                                                Log.d("ADDING EVENT", "performOrganzieByDate!");
+                                                webblenEvent.setAuthor_Pic(auth_pic);
+                                                //Log.d("ADDING EVENT", "performOrganzieByDate!");
                                                 organizeByDate(webblenEvent);
                                             }
                                         }
 
                                     }
+
                                 }
+
+                                if (eventsToday){
+                                    currentEventList = todayEventList;
+                                } else if (eventsTomorrow){
+                                    currentEventList = tomorrowEventList;
+                                } else if (eventsThisWeek){
+                                    currentEventList = thisWeekEventList;
+                                } else if (eventsThisMonth){
+                                    currentEventList = thisMonthEventList;
+                                } else if (eventsLater){
+                                    currentEventList = laterEventList;
+                                }
+                                updateRecyclerViewData();
+                                setRecyclerViewVisibility();
                             }
                         });
-                        Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
+                       // Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
                     }
 
                 } else {
@@ -345,6 +356,20 @@ public class EventTableActivity extends AppCompatActivity {
             }
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+    }
+
+    //Recycler View Thingies
+    private void updateRecyclerViewData(){
+        eventAdapter.webblenEventList = currentEventList;
+        eventAdapter.notifyDataSetChanged();
+    }
+    //Set RecylcerView Visibility
+    private void setRecyclerViewVisibility(){
+        if (currentEventList.size() > 0) {
+            eventRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            eventRecyclerView.setVisibility(View.INVISIBLE);
         }
     }
 }

@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
-import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -54,10 +53,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.webblen.events.webblen.R;
 import com.webblen.events.webblen.Utilities;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -458,11 +456,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                                     if (doc.getType() == DocumentChange.Type.ADDED) {
+                                        String auth_pic = doc.getDocument().getString("author_pic");
                                         WebblenEvent webblenEvent = doc.getDocument().toObject(WebblenEvent.class);
                                         for (String interest : userData) {
                                             ArrayList<String> eventCategories = webblenEvent.getCategories();
                                             if (eventCategories.contains(interest)){
-                                                Log.d("ADDING EVENT", "performOrganzieByDate!");
+                                                webblenEvent.setAuthor_Pic(auth_pic);
+                                               // Log.d("ADDING EVENT", webblenEvent.getEventKey());
                                                 organizeByDate(webblenEvent);
                                             }
                                         }
@@ -471,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 }
                             }
                         });
-                        Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
+                        //Log.d("All Events: ",todayEventList.toString() + tomorrowEventList.toString() + thisWeekEventList.toString() + thisMonthEventList.toString() + laterEventList.toString());
                         setTabListeners();
                         navBarBtm.setVisibility(View.VISIBLE);
                         mapProgressBar.setVisibility(View.INVISIBLE);

@@ -49,6 +49,9 @@ public class DashboardActivity extends AppCompatActivity {
     private FrameLayout createEventFrame;
     private FrameLayout myEventsFrame;
     private FrameLayout walletFrame;
+    private FrameLayout geoChatFrame;
+    private FrameLayout groupsFrame;
+    private FrameLayout searchFrame;
     private ImageButton settingsDashboardBtn;
     private Button logoutBtn;
 
@@ -91,13 +94,15 @@ public class DashboardActivity extends AppCompatActivity {
         createEventFrame = (FrameLayout) findViewById(R.id.createEventDashboardBtn);
         myEventsFrame = (FrameLayout) findViewById(R.id.myEventsDashboardBtn);
         walletFrame = (FrameLayout) findViewById(R.id.walletDashboardBtn);
+        geoChatFrame = (FrameLayout) findViewById(R.id.geoChatDashboardBtn);
+        groupsFrame = (FrameLayout) findViewById(R.id.groupDashboardBtn);
+        searchFrame = (FrameLayout) findViewById(R.id.searchDashboardBtn);
         settingsDashboardBtn = (ImageButton) findViewById(R.id.settingsDashboardBtn);
         logoutBtn = (Button) findViewById(R.id.logoutDashboardBtn);
 
         listEventsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
                 Intent listEventIntent = new Intent(DashboardActivity.this, EventTableActivity.class);
                 startActivity(listEventIntent);
             }
@@ -131,9 +136,8 @@ public class DashboardActivity extends AppCompatActivity {
         myEventsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashboardActivity.this, "This Feature is Temporarily Unavailable", Toast.LENGTH_SHORT).show();
-//                Intent myEventsIntent = new Intent(DashboardActivity.this, MyEventsActivity.class);
-//                startActivity(myEventsIntent);
+                Intent myEventsIntent = new Intent(DashboardActivity.this, MyEventsActivity.class);
+                startActivity(myEventsIntent);
             }
         });
 
@@ -145,9 +149,36 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        geoChatFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent geoChatIntent = new Intent(GeoChatActivity.this, CreateEventActivity.class);
+//                startActivity(geoChatIntent);
+            }
+        });
+
+        groupsFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashboardActivity.this, "This Feature is Currently Unavailable", Toast.LENGTH_SHORT).show();
+//                Intent groupsIntent = new Intent(GroupsActivity.this, MyEventsActivity.class);
+//                startActivity(groupsIntent);
+            }
+        });
+
+        searchFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashboardActivity.this, "This Feature is Currently Unavailable", Toast.LENGTH_SHORT).show();
+//                Intent searchIntent = new Intent(SearchActivity.this, WalletActivity.class);
+//                startActivity(searchIntent);
+            }
+        });
+
         settingsDashboardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(DashboardActivity.this, "This Feature is Currently Unavailable", Toast.LENGTH_SHORT).show();
                 Intent settingsIntent = new Intent(DashboardActivity.this, AccountSettingsActivity.class);
                 startActivity(settingsIntent);
             }

@@ -1,7 +1,7 @@
 package com.webblen.events.webblen.Adapters;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.webblen.events.webblen.Activities.EventInfoActivity;
-import com.webblen.events.webblen.Activities.EventTableActivity;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Activities.MainActivity;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 import com.webblen.events.webblen.R;
-import com.webblen.events.webblen.Recycler_Views.EventViewHolder;
 import com.webblen.events.webblen.Utilities;
 
 import java.util.ArrayList;
@@ -27,8 +26,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WebblenEventAdapter extends RecyclerView.Adapter<WebblenEventAdapter.EventViewHolder> {
 
+    RequestOptions requestOptions = new RequestOptions();
     public Context context;
     public List<WebblenEvent> webblenEventList;
+
 
     public WebblenEventAdapter(Context context, List<WebblenEvent> webblenEventList){
         this.context = context;
@@ -45,7 +46,8 @@ public class WebblenEventAdapter extends RecyclerView.Adapter<WebblenEventAdapte
     @Override
     public void onBindViewHolder(@NonNull WebblenEventAdapter.EventViewHolder holder, int position) {
 
-        WebblenEvent event = webblenEventList.get(position);
+        final WebblenEvent event = webblenEventList.get(position);
+        requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
         //Event Image
         String eventPathToImage = event.getPathToImage();
@@ -53,13 +55,22 @@ public class WebblenEventAdapter extends RecyclerView.Adapter<WebblenEventAdapte
             holder.eventCardImg.getLayoutParams().height = 0;
             holder.eventCardImg.setVisibility(View.INVISIBLE);
         } else {
-            Glide.with(context).load(eventPathToImage).into(holder.eventCardImg);
+            Glide.with(context).load(eventPathToImage).apply(requestOptions).into(holder.eventCardImg);
         }
 
         //Title
         holder.eventCardTitle.setText(event.getTitle());
 
-
+        //Auth Image
+        String authorPathToImage = event.getAuthor_Pic();
+        if (authorPathToImage.isEmpty() || authorPathToImage.contentEquals("") || authorPathToImage == null){
+            holder.eventCardAuthorImg.getLayoutParams().width = 0;
+            holder.eventCardAuthorImg.setVisibility(View.INVISIBLE);
+        } else {
+            Glide.with(context).load(authorPathToImage)
+                    .apply(requestOptions)
+                    .into(holder.eventCardAuthorImg);
+        }
         //Author
         String eventAuthor = "@" + event.getAuthor();
         holder.eventCardAuthName.setText(eventAuthor);
@@ -92,6 +103,16 @@ public class WebblenEventAdapter extends RecyclerView.Adapter<WebblenEventAdapte
         } else {
             holder.eventCardInt3.setBackgroundResource(Utilities.categoryToDrawable(eventList.get(2)));
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebblenEvent eventClicked = event;
+                Intent infoIntent = new Intent(context, EventInfoActivity.class);
+                infoIntent.putExtra("selectedEvent", eventClicked);
+                context.startActivity(infoIntent);
+            }
+        });
 
     }
 

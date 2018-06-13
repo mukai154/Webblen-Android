@@ -391,6 +391,16 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/dark_chat_icon" />
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="29dp"
+                            android:layout_marginStart="29dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/coming_soon_banner" />
                     </android.support.constraint.ConstraintLayout>
                 </FrameLayout>
 
@@ -408,6 +418,17 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="29dp"
+                            android:layout_marginStart="29dp"
+                            android:cropToPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/coming_soon_banner" />
 
                         <TextView
                             android:id="@+id/groupsTextView"
@@ -448,6 +469,16 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView14"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="29dp"
+                            android:layout_marginStart="29dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/coming_soon_banner" />
 
                         <TextView
                             android:id="@+id/searchTextView"

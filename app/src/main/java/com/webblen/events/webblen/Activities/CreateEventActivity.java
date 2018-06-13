@@ -21,7 +21,7 @@ import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.webblen.events.webblen.R;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,6 +61,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private Double eventLat;
     private Double eventLon;
     private Integer radius;
+    private String user_profile_pic;
     private Button filterBtn;
     private Boolean event18 = false;
     private Boolean event21 = false;
@@ -162,10 +163,12 @@ public class CreateEventActivity extends AppCompatActivity {
                 String eventKey = UUID.randomUUID().toString();
                 Double lat = eventLat;
                 Double lon = eventLon;
+                boolean verified = false;
                 boolean paid = false;
                 String pathToImage = "";
                 String title = eventTitleText.getText().toString();
                 Integer views = 0;
+                String author_pic = user_profile_pic;
 
                 if (address.toLowerCase().contains("location")){
                     Toast.makeText(CreateEventActivity.this, "Please Set a Location", Toast.LENGTH_LONG).show();
@@ -190,7 +193,7 @@ public class CreateEventActivity extends AppCompatActivity {
                             event18, event21, eventKey,
                             lat, lon, notificationOnly,
                             pathToImage, radius, eventTime,
-                            title, views);
+                            title, views, author_pic, paid, verified);
 
                     Intent reviewIntent = new Intent(CreateEventActivity.this, PurchaseEventActivity.class);
                     reviewIntent.putExtra("mainImageUri", mainImageURI.toString());
@@ -211,9 +214,10 @@ public class CreateEventActivity extends AppCompatActivity {
                     if(task.getResult().exists()){
 
                         current_username = task.getResult().getString("username");
+                        user_profile_pic = task.getResult().getString("profile_pic");
                         isVerified = task.getResult().getBoolean("isVerified");
                         //If username or pic is null...
-                        if (current_username == null){
+                        if (current_username == null || user_profile_pic.isEmpty() || user_profile_pic == null){
                             Intent setupIntent = new Intent(CreateEventActivity.this, SetupActivity.class);
                             startActivity(setupIntent);
                             finish();

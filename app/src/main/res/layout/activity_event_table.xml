@@ -12,7 +12,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:background="@color/colorPastelOrange"
+        android:background="@color/colorDarkGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:layout_marginTop="50dp"
+        android:alpha="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,11 +127,32 @@
         app:layout_constraintStart_toEndOf="@+id/thisMonthTableBtn"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
+    <ImageView
+        android:id="@+id/noResultsImgView"
+        android:layout_width="122dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="135dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:srcCompat="@drawable/disappointed" />
+
+    <TextView
+        android:id="@+id/noResultsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="No Events Found For Today"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noResultsImgView" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/eventRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorElusiveBlue"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />

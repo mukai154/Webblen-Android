@@ -24,8 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.webblen.events.webblen.R;
-import com.webblen.events.webblen.Utilities;
-import com.webblen.events.webblen.Objects.WebblenEvent;
+import com.webblen.events.webblen.Classes.WebblenEvent;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -87,7 +86,8 @@ public class EventInfoActivity extends AppCompatActivity {
 
         //Set UI
         setEventImg(selectedEvent.getPathToImage());
-        getEventAuthorFirestoreData(selectedEvent.getAuthor());
+        setAuthImg(selectedEvent.getAuthor_Pic());
+        //Log.d("AUTH IMG", selectedEvent.getAuthorPic());
         setTextUIViews();
         addViewToEvent();
 
@@ -112,53 +112,53 @@ public class EventInfoActivity extends AppCompatActivity {
                 });
     }
 
-    private void getEventAuthorFirestoreData(final String author){
-        firebaseFirestore.collection("usernames").document(author.toLowerCase()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    String author_uid = task.getResult().getString("uid");
-                    if (author_uid == null){
-                        Toast.makeText(EventInfoActivity.this, "There was an issue loading this event", Toast.LENGTH_LONG).show();
-                    } else {
-                        firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                                if (task.isSuccessful()) {
-
-                                    if (task.getResult().exists()) {
-
-                                        String username = task.getResult().getString("username");
-                                        String profile_pic = task.getResult().getString("profile_pic");
-
-                                        //pic is null...
-                                        if (profile_pic == null || profile_pic.contentEquals("")) {
-                                            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) eventAuthImg.getLayoutParams();
-                                            params.width = 1;
-                                            eventAuthImg.setLayoutParams(params);
-                                            eventAuthImg.setVisibility(View.INVISIBLE);
-
-                                        } else {
-
-                                            setAuthImg(profile_pic);
-
-                                        }
-                                    }
-                                } else {
-                                    String error = task.getException().getMessage();
-                                    Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    }
-                } else {
-                    String error = task.getException().getMessage();
-                    Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+//    private void getEventAuthorFirestoreData(final String author){
+//        firebaseFirestore.collection("usernames").document(author.toLowerCase()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()){
+//                    String author_uid = task.getResult().getString("uid");
+//                    if (author_uid == null){
+//                        Toast.makeText(EventInfoActivity.this, "There was an issue loading this event", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        firebaseFirestore.collection("users").document(author_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                                if (task.isSuccessful()) {
+//
+//                                    if (task.getResult().exists()) {
+//
+//                                        String username = task.getResult().getString("username");
+//                                        String profile_pic = task.getResult().getString("profile_pic");
+//
+//                                        //pic is null...
+//                                        if (profile_pic == null || profile_pic.contentEquals("")) {
+//                                            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) eventAuthImg.getLayoutParams();
+//                                            params.width = 1;
+//                                            eventAuthImg.setLayoutParams(params);
+//                                            eventAuthImg.setVisibility(View.INVISIBLE);
+//
+//                                        } else {
+//
+//                                            setAuthImg(profile_pic);
+//
+//                                        }
+//                                    }
+//                                } else {
+//                                    String error = task.getException().getMessage();
+//                                    Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+//                                }
+//                            }
+//                        });
+//                    }
+//                } else {
+//                    String error = task.getException().getMessage();
+//                    Toast.makeText(EventInfoActivity.this, "Load Error: " + error, Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//    }
 
     private void setEventImg(String pathToImage){
         if (pathToImage.isEmpty() || pathToImage.contentEquals("") || pathToImage == null){
